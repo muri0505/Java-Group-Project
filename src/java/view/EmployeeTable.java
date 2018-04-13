@@ -36,7 +36,7 @@ public class EmployeeTable extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Sample2Servlet</title>");            
+            out.println("<title>Employee Table</title>");            
             out.println("</head>");
             out.println("<body>");
             

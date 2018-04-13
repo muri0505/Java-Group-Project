@@ -9,45 +9,41 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import transferobjects.Employee;
+import transferobjects.Department;
 
 /**
  *
  * @author Can Shi
  */
-public class EmployeeDAOImpl implements EmployeeDAO{
+public class DepartmentDAOImpl implements DepartmentDAO{
 
-    private static final String GET_ALL_EMPLOYEES = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees ORDER BY emp_no LIMIT 100";
-    private static final String INSERT_EMPLOYEES = "INSERT INTO employees (birth_date, first_name, last_name, gender, hire_date) VALUES(?, ?, ?, ?, ?)";
+    private static final String GET_ALL_DEPARTMENTS = "SELECT dept_no, dept_name FROM departments ORDER BY dept_no";
+    private static final String INSERT_DEPARTMENTS = "INSERT INTO departments (dept_name) VALUES(?)";
     //private static final String DELETE_COURSES = "DELETE FROM Courses WHERE course_num = ?";
     //private static final String UPDATE_COURSES = "UPDATE Courses SET name = ? WHERE course_num = ?";
     //private static final String GET_BY_CODE_COURSES = "SELECT course_num, name FROM Courses WHERE name = ?";
     
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<Department> getAllDepartments() {
         @SuppressWarnings("unchecked")
-        List<Employee> employees = Collections.EMPTY_LIST;
-        Employee employee;
+        List<Department> departments = Collections.EMPTY_LIST;
+        Department department;
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try{
             con = DataSource.getConnection();
-            pstmt = con.prepareStatement( GET_ALL_EMPLOYEES);
+            pstmt = con.prepareStatement( GET_ALL_DEPARTMENTS);
             rs = pstmt.executeQuery();
-            employees = new ArrayList<>(100);
+            departments = new ArrayList<>(100);
             while( rs.next()){
-                employee = new Employee();
-                employee.setEmpNo( rs.getString("emp_no"));
-                employee.setBirthDate( rs.getString("birth_date"));
-                employee.setFirstName( rs.getString("first_name"));
-                employee.setLastName( rs.getString("last_name"));
-                employee.setGender( rs.getString("gender"));
-                employee.setHireDate( rs.getString("hire_date"));
-                employees.add(employee);
+                department = new Department();
+                department.setDeptNo( rs.getString("dept_no"));
+                department.setDeptName( rs.getString("dept_name"));
+                departments.add(department);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (rs != null) {
@@ -71,21 +67,17 @@ public class EmployeeDAOImpl implements EmployeeDAO{
                 System.out.println(ex.getMessage());
             }
         }
-        return employees;
+        return departments;
     }
 
     @Override
-    public void addEmployee(Employee employee) {
+    public void addDepartment(Department department) {
         try( Connection con = DataSource.getConnection();
-                PreparedStatement pstmt = con.prepareStatement( INSERT_EMPLOYEES);){
-            pstmt.setString(1, employee.getBirthDate());
-            pstmt.setString(2, employee.getFirstName());
-            pstmt.setString(3, employee.getLastName());
-            pstmt.setString(4, employee.getGender());
-            pstmt.setString(5, employee.getHireDate());
+                PreparedStatement pstmt = con.prepareStatement( INSERT_DEPARTMENTS);){
+            pstmt.setString(1, department.getDeptName());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(EmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 }

@@ -5,7 +5,7 @@
  */
 package view;
 
-import business.EmployeesLogic;
+import business.DepartmentsLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -13,13 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transferobjects.Employee;
+import transferobjects.Department;
 
 /**
  *
  * @author Shariar
  */
-public class Sample2_1Servlet extends HttpServlet {
+public class DepartmentTable extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,32 +33,26 @@ public class Sample2_1Servlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Sample2Servlet</title>");
-            //https://www.w3schools.com/css/css_table.asp
-            out.println("<style>");
-            out.println("table {border-collapse: collapse;width: auto;}");
-            out.println("th, td {text-align: left;padding: 8px;}");
-            out.println("tr:nth-child(even) {background-color: #f2f2f2;}");
-            out.println("</style>");
+            out.println("<title>Department Table</title>");            
             out.println("</head>");
             out.println("<body>");
-            //https://www.w3schools.com/css/css_table.asp
-            EmployeesLogic logic = new EmployeesLogic();
-            List<Employee> employees = logic.getAllEmployees();
+            
+            DepartmentsLogic logic = new DepartmentsLogic();
+            List<Department> departments = logic.getAllDepartments();
             out.println("<table border=\"1\">");
-            out.println("<caption>Courses</caption>");
+            out.println("<caption>Departments</caption>");
             out.println("<tr>");
-            out.println("<th>Course Code</th>");
-            out.println("<th>Course Name</th>");
+            out.println("<th>dept_no</th>");
+            out.println("<th>dept_name</th>");
             out.println("</tr>");
-           /* for (Employee course : courses) {
-                out.printf("<tr><td>%s</td><td>%s</td></tr>", course.getCode(), course.getName());
-            }*/
-
+            for (Department department : departments) {
+                out.printf("<tr> <td>%s</td> <td>%s</td></tr>", 
+                        department.getDeptNo(),department.getDeptName());
+            }
+            
             out.println("</table>");
             out.println("</body>");
             out.println("</html>");

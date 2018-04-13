@@ -18,24 +18,43 @@ import javax.naming.NamingException;
  * @author Shariar
  */
 public class DataSource {
-
-    public DataSource() {
+    
+    private static DataSource singleton;
+    private static javax.sql.DataSource ds;
+    
+    private DataSource() {
+        ds=getDataSource();
     }
-
-    /**
-     * Only use one connection for this application, prevent memory leaks.
-     * @return 
-     */
-    public Connection createConnection() {
-
+    
+    private javax.sql.DataSource getDataSource(){
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             javax.sql.DataSource ds = (javax.sql.DataSource) envContext.lookup("jdbc/employees");
-            return ds.getConnection();
-        } catch (SQLException | NamingException ex) {
+            return ds;
+        } catch (NamingException ex) {
             Logger.getLogger(DataSource.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+    /**
+     * Only use one connection for this application, prevent memory leaks.
+     * @return 
+     */
+    public static Connection getConnection(){
+        if(singleton==null){
+            singleton = new DataSource();
+        }
+        return singleton.createConnection();
+    }
+    
+    private Connection createConnection() {
+        try {
+            return ds.getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(DataSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }
