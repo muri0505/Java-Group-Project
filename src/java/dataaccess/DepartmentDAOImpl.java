@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.Department;
+
 /**
  *
  * @author Can Shi
@@ -36,7 +37,9 @@ public class DepartmentDAOImpl implements DepartmentDAO{
             rs = pstmt.executeQuery();
             departments = new ArrayList<>(100);
             while( rs.next()){
-                department = new Department.Builder().setDeptNo(rs.getString("dept_no")).setDeptName(rs.getString("dept_name")).build();
+                department = new Department();
+                department.setDeptNo( rs.getString("dept_no"));
+                department.setDeptName( rs.getString("dept_name"));
                 departments.add(department);
             }
         } catch (SQLException ex) {

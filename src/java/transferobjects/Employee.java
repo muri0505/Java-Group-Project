@@ -8,12 +8,14 @@ import java.sql.Date;
  * @author Can Shi
  */
 public class Employee {
+    
     private String emp_no;
     private String birth_date;
     private String first_name;
     private String last_name;
     private String gender;
     private String hire_date;
+    
     
     public Employee(){}
     
@@ -25,7 +27,7 @@ public class Employee {
         setGender(gender);
         setHireDate(hire_date);
     }
-   
+    
     public void setEmpNo(String emp_no){
         this.emp_no = emp_no;
     }
@@ -74,48 +76,4 @@ public class Employee {
         return hire_date;
     }
     
-    public static class Builder{
-        private String emp_no;
-        private String birth_date;
-        private String first_name;
-        private String last_name;
-        private String gender;
-        private String hire_date;
-        
-        public Builder(){}
-        
-        public Builder setEmpNo(String emp_no){
-            this.emp_no = emp_no;
-            return this;
-        }
-        
-        public Builder setBirthDate(String birth_date){
-            this.birth_date = birth_date;
-            return this;
-        }
-        
-        public Builder setFirstName( String first_name){
-            this.first_name = first_name;
-            return this;
-        }
-        
-        public Builder setLastName( String last_name){
-            this.last_name = last_name;
-            return this;
-        }
-   
-        public Builder setGender( String gender){
-            this.gender = gender;
-            return this;
-        }
-        
-        public Builder setHireDate(String hire_date){
-            this.hire_date = hire_date;
-            return this;
-        }
-
-        public Employee build(){
-            return new Employee(this.emp_no, this.birth_date, this.first_name, this.last_name, this.gender, this.hire_date);
-        }
-    }
 }

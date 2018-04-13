@@ -37,7 +37,13 @@ public class EmployeeDAOImpl implements EmployeeDAO{
             rs = pstmt.executeQuery();
             employees = new ArrayList<>(100);
             while( rs.next()){
-                employee = new Employee.Builder().setEmpNo( rs.getString("emp_no")).setBirthDate( rs.getString("birth_date")).setFirstName( rs.getString("first_name")).setLastName( rs.getString("last_name")).setGender( rs.getString("gender")).setHireDate( rs.getString("hire_date")).build();
+                employee = new Employee();
+                employee.setEmpNo( rs.getString("emp_no"));
+                employee.setBirthDate( rs.getString("birth_date"));
+                employee.setFirstName( rs.getString("first_name"));
+                employee.setLastName( rs.getString("last_name"));
+                employee.setGender( rs.getString("gender"));
+                employee.setHireDate( rs.getString("hire_date"));
                 employees.add(employee);
             }
         } catch (SQLException ex) {
