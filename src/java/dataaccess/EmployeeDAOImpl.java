@@ -40,7 +40,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(GET_ALL_EMPLOYEES);
             rs = pstmt.executeQuery();
-
+            
             while (rs.next()) {
                 employee= (EmployeeFactory)DTOFactoryCreator.createBuilder(EmployeeFactory.class);
             }
