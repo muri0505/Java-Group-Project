@@ -1,5 +1,8 @@
 package dataaccess;
 
+import factory.DTOFactoryCreator;
+import factory.EmployeeFactory;
+import factory.Factory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,26 +29,23 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Employee> getAllEmployees() {
         @SuppressWarnings("unchecked")
-        List<Employee> employees = Collections.EMPTY_LIST;
-        Employee employee;
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        
+        List<Employee> employees = Collections.EMPTY_LIST;
+        Factory employee = null;
+        
         try {
             con = DataSource.getConnection();
             pstmt = con.prepareStatement(GET_ALL_EMPLOYEES);
             rs = pstmt.executeQuery();
-            employees = new ArrayList<>(100);
+
             while (rs.next()) {
-                employee = new Employee();
-                employee.setEmpNo(rs.getString("emp_no"));
-                employee.setBirthDate(rs.getString("birth_date"));
-                employee.setFirstName(rs.getString("first_name"));
-                employee.setLastName(rs.getString("last_name"));
-                employee.setGender(rs.getString("gender"));
-                employee.setHireDate(rs.getString("hire_date"));
-                employees.add(employee);
+                employee= (EmployeeFactory)DTOFactoryCreator.createBuilder(EmployeeFactory.class);
             }
+            employees = employee.createListFromResultSet(rs);
+            
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

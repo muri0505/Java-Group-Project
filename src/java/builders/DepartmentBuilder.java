@@ -15,8 +15,12 @@ public class DepartmentBuilder {
 
     private static String COL_DEPT_NO = "dept_no";
     private static String COL_DEPT_NAME = "dept_name";
-    private Department department = new Department();
+    private Department department;
 
+    public DepartmentBuilder(){
+        department = new Department();
+    }
+    
     public void build(Map<String, String[]> map) {
         setDeptNo(map);
         setDeptName(map);

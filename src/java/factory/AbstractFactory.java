@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import transferobjects.Department;
 /**
  *
  * @author shican
@@ -29,15 +29,16 @@ public abstract class AbstractFactory<T> implements Factory<T> {
 
     @Override
     public List<T> createListFromResultSet(ResultSet rs) {
+        List<T> collections = Collections.EMPTY_LIST;
         try {
-            List<T> collections = Collections.EMPTY_LIST;
             collections = new ArrayList<>(100);
+            rs.beforeFirst();
             while (rs.next()) {
-               //collections.add()
-            }
+                collections.add(createFromResultSet(rs));
+           }
         } catch (SQLException ex) {
             Logger.getLogger(AbstractFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return collections;
     }
 }

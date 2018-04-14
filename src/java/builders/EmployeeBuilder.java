@@ -18,14 +18,18 @@ import transferobjects.Employee;
  */
 public class EmployeeBuilder {
 
-    private static String COL_EMPLOYEE_NO = "dept_no";
+    private static String COL_EMPLOYEE_NO = "emp_no";
     private static String COL_EMPLOYEE_BIRTH_DATE = "birth_date";
     private static String COL_EMPLOYEE_FIRST_NAME = "first_name";
     private static String COL_EMPLOYEE_LAST_NAME = "last_name";
     private static String COL_EMPLOYEE_GENDER = "gender";
     private static String COL_EMPLOYEE_HIRE_DATE = "hire_date";
 
-    private Employee employee = new Employee();
+    private Employee employee;
+    
+    public EmployeeBuilder(){
+        employee = new Employee();
+    }
 
     public void build(Map<String, String[]> map) {
         setEmployeeNo(map);

@@ -16,10 +16,15 @@ import transferobjects.Department;
  */
 public class DepartmentFactory extends AbstractFactory {
     
-    DepartmentBuilder db = new DepartmentBuilder();
+    DepartmentBuilder db;
+    
+    public DepartmentFactory(){
+        db = new DepartmentBuilder();
+    }
 
     @Override
     public Department createFromResultSet(ResultSet rs) {
+        db = new DepartmentBuilder();
         db.setDeptName(rs);
         db.setDeptNo(rs);
         return db.getDept();
