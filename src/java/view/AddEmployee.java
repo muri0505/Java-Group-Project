@@ -1,5 +1,7 @@
 package view;
 
+import business.EmployeesLogic;
+import factory.DTOFactoryCreator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -8,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import transferobjects.Employee;
 
 public class AddEmployee extends HttpServlet {
 
@@ -38,8 +41,6 @@ public class AddEmployee extends HttpServlet {
             out.println("<input type=\"radio\" name=\"gender\" value=\"male\" checked> Male<br>");
             out.println("<input type=\"radio\" name=\"gender\" value=\"female\"> Female<br>");
             out.println("<input type=\"radio\" name=\"gender\" value=\"other\"> Other<br><br>");
-            out.println("<input type=\"checkbox\" name=\"car\" value=\"car\"> Car<br>");
-            out.println("<input type=\"checkbox\" name=\"fly\" value=\"alien\"> Fly<br><br>");
             out.println("<input type=\"date\" name=\"bday\" min=\"1900-01-01\" max=\"2007-12-30\"><br><br>");
             out.println("<input type=\"submit\" value=\"Submit\">");
             out.println("</form>");
@@ -58,7 +59,7 @@ public class AddEmployee extends HttpServlet {
                 .append(", ")
                 .append("Value/s=").append(Arrays.toString(v))
                 .append(System.lineSeparator()));
-        return builder.toString();
+                return builder.toString();
     }
 
     private String getParameter(HttpServletRequest request, String ID) {
@@ -95,6 +96,9 @@ public class AddEmployee extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        EmployeesLogic logic = new EmployeesLogic();
+        Employee employee = DTOFactoryCreator.createBuilder(Employee.class).createFromMap(request.getParameterMap());
+        logic.addEmployee(employee);
     }
 
     /**
