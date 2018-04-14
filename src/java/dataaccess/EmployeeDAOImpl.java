@@ -22,6 +22,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     private static final String GET_ALL_EMPLOYEES = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees ORDER BY emp_no LIMIT 100";
     private static final String INSERT_EMPLOYEES = "INSERT INTO employees (birth_date, first_name, last_name, gender, hire_date) VALUES(?, ?, ?, ?, ?)";
+    private static final String SEARCH_EMPLOYEE_ID = "SELECT emp_no, birth_date, first_name, last_name, gender, hire_date FROM employees WHERE emp_no = ";
     //private static final String DELETE_COURSES = "DELETE FROM Courses WHERE course_num = ?";
     //private static final String UPDATE_COURSES = "UPDATE Courses SET name = ? WHERE course_num = ?";
     //private static final String GET_BY_CODE_COURSES = "SELECT course_num, name FROM Courses WHERE name = ?";
@@ -41,9 +42,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             pstmt = con.prepareStatement(GET_ALL_EMPLOYEES);
             rs = pstmt.executeQuery();
             
-            while (rs.next()) {
-                employee= (EmployeeFactory)DTOFactoryCreator.createBuilder(EmployeeFactory.class);
-            }
+            //while (rs.next()) {}
+            employee= (EmployeeFactory)DTOFactoryCreator.createBuilder(EmployeeFactory.class);
             employees = employee.createListFromResultSet(rs);
             
         } catch (SQLException ex) {
@@ -88,4 +88,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             Logger.getLogger(EmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Employee getEmployeByEmployeeNo(Integer EmployeeNo){
+        EmployeeFactory EmployeeFactory = null;
+        Employee e = null;
+        try( Connection con = DataSource.getConnection();
+                PreparedStatement pstmt = con.prepareStatement(SEARCH_EMPLOYEE_ID + "'" + EmployeeNo + "'");
+                ResultSet rs = pstmt.executeQuery();){
+            
+            while(rs.next()){
+                EmployeeFactory = (EmployeeFactory)DTOFactoryCreator.createBuilder(EmployeeFactory.class);
+                e = EmployeeFactory.createFromResultSet(rs);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return e;
+    }
+    
 }

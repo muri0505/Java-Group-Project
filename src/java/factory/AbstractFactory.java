@@ -32,7 +32,7 @@ public abstract class AbstractFactory<T> implements Factory<T> {
         List<T> collections = Collections.EMPTY_LIST;
         try {
             collections = new ArrayList<>(100);
-            rs.beforeFirst();
+            //rs.beforeFirst();
             while (rs.next()) {
                 collections.add(createFromResultSet(rs));
            }

@@ -23,6 +23,7 @@ public class DepartmentDAOImpl implements DepartmentDAO{
 
     private static final String GET_ALL_DEPARTMENTS = "SELECT dept_no, dept_name FROM departments ORDER BY dept_no";
     private static final String INSERT_DEPARTMENTS = "INSERT INTO departments (dept_name) VALUES(?)";
+    private static final String SEARCH_DEPARTMENT_ID = "SELECT dept_no, dept_name FROM departments WHERE dept_no =  ";
     //private static final String DELETE_COURSES = "DELETE FROM Courses WHERE course_num = ?";
     //private static final String UPDATE_COURSES = "UPDATE Courses SET name = ? WHERE course_num = ?";
     //private static final String GET_BY_CODE_COURSES = "SELECT course_num, name FROM Courses WHERE name = ?";
@@ -42,9 +43,9 @@ public class DepartmentDAOImpl implements DepartmentDAO{
             pstmt = con.prepareStatement( GET_ALL_DEPARTMENTS);
             rs = pstmt.executeQuery();
 
-            while( rs.next()){
-                department= (DepartmentFactory)DTOFactoryCreator.createBuilder(DepartmentFactory.class);
-            }
+            //while( rs.next()){}
+            
+            department = (DepartmentFactory)DTOFactoryCreator.createBuilder(DepartmentFactory.class);
             departments = department.createListFromResultSet(rs);
              
         } catch (SQLException ex) {
@@ -72,7 +73,6 @@ public class DepartmentDAOImpl implements DepartmentDAO{
                 System.out.println(ex.getMessage());
             }
         }
-        
         return  departments;
     }
 
@@ -85,5 +85,23 @@ public class DepartmentDAOImpl implements DepartmentDAO{
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
+    }
+    
+    @Override
+    public Department getDepartmentByDepartmentNo(String DepartmentNo){
+        DepartmentFactory departmentFactory = null;
+        Department d = null;
+        try( Connection con = DataSource.getConnection();
+                PreparedStatement pstmt = con.prepareStatement(SEARCH_DEPARTMENT_ID + "'" + DepartmentNo + "'");
+                ResultSet rs = pstmt.executeQuery();){
+            
+            while(rs.next()){
+                departmentFactory = (DepartmentFactory)DTOFactoryCreator.createBuilder(DepartmentFactory.class);
+                d = departmentFactory.createFromResultSet(rs);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return d;
     }
 }

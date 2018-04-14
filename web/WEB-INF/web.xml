@@ -16,6 +16,10 @@
         <servlet-name>DepartmentServlet</servlet-name>
         <servlet-class>view.DepartmentTable</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>view.Search</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Sample1Servlet</servlet-name>
         <url-pattern>/Sample1</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>DepartmentServlet</servlet-name>
         <url-pattern>/Department</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/Search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

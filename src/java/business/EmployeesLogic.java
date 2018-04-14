@@ -30,6 +30,10 @@ public class EmployeesLogic {
         validateEmployee(employee);
         employeeDAO.addEmployee(employee);
     }
+    
+    public Employee getEmployeByEmployeeNo(Integer EmployeeNo){
+        return employeeDAO.getEmployeByEmployeeNo(EmployeeNo);
+    }
 
     private void cleanEmployee(Employee employee) {
         if (employee.getEmpNo() != null) {
@@ -55,7 +59,6 @@ public class EmployeesLogic {
         if (employee.getHireDate() != null) {
             employee.setHireDate(employee.getHireDate().trim());
         }
-
     }
 
     private void validateEmployee(Employee employee) {
@@ -65,7 +68,6 @@ public class EmployeesLogic {
         validateString(employee.getLastName(), "Last Name", EMPLOYEE_NAME_MAX_LENGTH, false);
         validateString(employee.getGender(), "Gender", EMPLOYEE_NAME_MAX_LENGTH, false);
         validateString(employee.getHireDate(), "Hire Date", EMPLOYEE_NAME_MAX_LENGTH, false);
-
     }
 
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {
