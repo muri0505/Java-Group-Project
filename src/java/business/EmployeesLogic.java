@@ -35,23 +35,23 @@ public class EmployeesLogic {
         if (employee.getEmpNo() != null) {
             employee.setEmpNo(employee.getEmpNo().trim());
         }
-        
+
         if (employee.getBirthDate() != null) {
             employee.setBirthDate(employee.getBirthDate().trim());
         }
-        
+
         if (employee.getFirstName() != null) {
             employee.setFirstName(employee.getFirstName().trim());
         }
-        
+
         if (employee.getLastName() != null) {
             employee.setLastName(employee.getLastName().trim());
         }
-        
+
         if (employee.getGender() != null) {
             employee.setGender(employee.getGender().trim());
         }
-        
+
         if (employee.getHireDate() != null) {
             employee.setHireDate(employee.getHireDate().trim());
         }
@@ -72,8 +72,9 @@ public class EmployeesLogic {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate
         } else if (value == null) {
-            if( !isNullAllowed)
+            if (!isNullAllowed) {
                 throw new IllegalArgumentException(String.format("%s cannot be null", fieldName));
+            }
         } else if (value.isEmpty()) {
             throw new IllegalArgumentException(String.format("%s cannot be empty or only whitespace", fieldName));
         } else if (value.length() > maxLength) {

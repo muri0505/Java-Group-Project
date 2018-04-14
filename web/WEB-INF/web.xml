@@ -9,8 +9,8 @@
         <servlet-class>view.EmployeeTable</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Sample3Servlet</servlet-name>
-        <servlet-class>view.Sample3Servlet</servlet-class>
+        <servlet-name>AddEmployeeServlet</servlet-name>
+        <servlet-class>view.AddEmployee</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DepartmentServlet</servlet-name>
@@ -25,8 +25,8 @@
         <url-pattern>/Employee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Sample3Servlet</servlet-name>
-        <url-pattern>/Sample3</url-pattern>
+        <servlet-name>AddEmployeeServlet</servlet-name>
+        <url-pattern>/AddEmployee</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DepartmentServlet</servlet-name>

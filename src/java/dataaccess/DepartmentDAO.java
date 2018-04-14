@@ -10,13 +10,15 @@ import transferobjects.Department;
 
 /**
  *
- * @author Shawn
+ * @author shican
  */
 public interface DepartmentDAO {
-	List<Department> getAllDepartments();
-	void addDepartment(Department department);
-	//List<Employee> getEmployeeByFirstName(String firstName);
-	//Employee getEmployeByEmployeeNo(Integer EmployeeNo);
-	//void updateEmployee(Employee employee);
-	//void deleteEmployee(Employee employee);
+
+    List<Department> getAllDepartments();
+
+    void addDepartment(Department department);
+    //List<Employee> getEmployeeByFirstName(String firstName);
+    //Employee getEmployeByEmployeeNo(Integer EmployeeNo);
+    //void updateEmployee(Employee employee);
+    //void deleteEmployee(Employee employee);
 }

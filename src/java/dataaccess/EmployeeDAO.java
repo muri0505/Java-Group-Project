@@ -13,10 +13,12 @@ import transferobjects.Employee;
  * @author Shawn
  */
 public interface EmployeeDAO {
-	List<Employee> getAllEmployees();
-	void addEmployee(Employee employee);
-	//List<Employee> getEmployeeByFirstName(String firstName);
-	//Employee getEmployeByEmployeeNo(Integer EmployeeNo);
-	//void updateEmployee(Employee employee);
-	//void deleteEmployee(Employee employee);
+
+    List<Employee> getAllEmployees();
+
+    void addEmployee(Employee employee);
+    //List<Employee> getEmployeeByFirstName(String firstName);
+    //Employee getEmployeByEmployeeNo(Integer EmployeeNo);
+    //void updateEmployee(Employee employee);
+    //void deleteEmployee(Employee employee);
 }

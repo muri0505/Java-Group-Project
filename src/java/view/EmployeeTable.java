@@ -22,7 +22,8 @@ import transferobjects.Employee;
 public class EmployeeTable extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -36,10 +37,10 @@ public class EmployeeTable extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Employee Table</title>");            
+            out.println("<title>Employee Table</title>");
             out.println("</head>");
             out.println("<body>");
-            
+
             EmployeesLogic logic = new EmployeesLogic();
             List<Employee> employees = logic.getAllEmployees();
             out.println("<table border=\"1\">");
@@ -53,12 +54,12 @@ public class EmployeeTable extends HttpServlet {
             out.println("<th>hire_date</th>");
             out.println("</tr>");
             for (Employee employee : employees) {
-                out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>", 
-                        employee.getEmpNo(), employee.getBirthDate(), 
+                out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        employee.getEmpNo(), employee.getBirthDate(),
                         employee.getFirstName(), employee.getLastName(),
                         employee.getGender(), employee.getHireDate());
             }
-            
+
             out.println("</table>");
             out.println("</body>");
             out.println("</html>");

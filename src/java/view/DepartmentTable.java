@@ -22,7 +22,8 @@ import transferobjects.Department;
 public class DepartmentTable extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -36,10 +37,10 @@ public class DepartmentTable extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Department Table</title>");            
+            out.println("<title>Department Table</title>");
             out.println("</head>");
             out.println("<body>");
-            
+
             DepartmentsLogic logic = new DepartmentsLogic();
             List<Department> departments = logic.getAllDepartments();
             out.println("<table border=\"1\">");
@@ -49,10 +50,10 @@ public class DepartmentTable extends HttpServlet {
             out.println("<th>dept_name</th>");
             out.println("</tr>");
             for (Department department : departments) {
-                out.printf("<tr> <td>%s</td> <td>%s</td></tr>", 
-                        department.getDeptNo(),department.getDeptName());
+                out.printf("<tr> <td>%s</td> <td>%s</td></tr>",
+                        department.getDeptNo(), department.getDeptName());
             }
-            
+
             out.println("</table>");
             out.println("</body>");
             out.println("</html>");

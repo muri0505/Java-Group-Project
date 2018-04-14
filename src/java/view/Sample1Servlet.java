@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Sample1Servlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -32,21 +33,21 @@ public class Sample1Servlet extends HttpServlet {
             out.println("<title>Servlet Sample1Servlet</title>");
             out.println("</head>");
             out.println("<body>");
-            
+
             out.println("<h1 style=\"background-color:DodgerBlue;\">heading one</h1>");
             out.println("<h2 style=\"color:Tomato;\">heading two</h2>");
             out.println("<h3 style=\"border:2px solid Violet;\">heading three</h3>");
-            
+
             out.println("<h4>heading four</h4>");
             out.println("<h5>heading five</h5>");
             out.println("<h6>heading six</h6>");
-            
+
             out.println("<p>line 1. line 2.</p>");
-            
+
             out.println("<p>line 1.<br>line 2.</p>");
-            
+
             out.println("<pre>line 1.\nline 2.</pre>");
-            
+
             out.println("<p><!-- Formatting -->");
             out.println("<b>Bold text</b><br>");
             out.println("<strong>Important text</strong><br>");
@@ -59,7 +60,7 @@ public class Sample1Servlet extends HttpServlet {
             out.println("<sub>Subscript text</sub><br>");
             out.println("<sup>Superscript text</sup>");
             out.println("</p>");
-            
+
             out.println("<ul style=\"list-style-type:disc\">");
             out.println("<li>Coffee</li>");
             out.println("<li>Tea</li>");
@@ -69,13 +70,13 @@ public class Sample1Servlet extends HttpServlet {
             out.println("</ul>");
             out.println("<li>Milk</li>");
             out.println("</ul>");
-            
+
             out.println("<ol type=\"1\">");
             out.println("<li>Coffee</li>");
             out.println("<li>Tea</li>");
             out.println("<li>Milk</li>");
             out.println("</ol>");
-            
+
             out.println("</body>");
             out.println("</html>");
         }

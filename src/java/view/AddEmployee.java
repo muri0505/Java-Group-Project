@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Sample3Servlet extends HttpServlet {
+public class AddEmployee extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,7 +30,7 @@ public class Sample3Servlet extends HttpServlet {
             out.println("<title>Servlet Sample3Servlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"Sample3\" method=\"post\">");
+            out.println("<form action=\"AddEmployee\" method=\"post\">");
             out.println("First name:<br>");
             out.println("<input type=\"text\" name=\"firstname\" value=\"Mickey\"><br>");
             out.println("Last name:<br>");

@@ -35,7 +35,7 @@ public class DepartmentsLogic {
         if (department.getDeptNo() != null) {
             department.setDeptNo(department.getDeptNo().trim());
         }
-        
+
         if (department.getDeptName() != null) {
             department.setDeptName(department.getDeptName().trim());
         }
@@ -51,8 +51,9 @@ public class DepartmentsLogic {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate
         } else if (value == null) {
-            if( !isNullAllowed)
+            if (!isNullAllowed) {
                 throw new IllegalArgumentException(String.format("%s cannot be null", fieldName));
+            }
         } else if (value.isEmpty()) {
             throw new IllegalArgumentException(String.format("%s cannot be empty or only whitespace", fieldName));
         } else if (value.length() > maxLength) {
