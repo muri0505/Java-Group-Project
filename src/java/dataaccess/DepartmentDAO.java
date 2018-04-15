@@ -18,7 +18,7 @@ public interface DepartmentDAO {
 
     void addDepartment(Department department);
     //List<Employee> getEmployeeByFirstName(String firstName);
-    //Employee getEmployeByEmployeeNo(Integer EmployeeNo);
+    Department getDepartmentByDepartmentNo(String DepartmentNo);
     //void updateEmployee(Employee employee);
     //void deleteEmployee(Employee employee);
 }

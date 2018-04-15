@@ -15,10 +15,15 @@ import transferobjects.Employee;
  * @author shican
  */
 public class EmployeeFactory extends AbstractFactory{
-    EmployeeBuilder db = new EmployeeBuilder();
+    EmployeeBuilder db;
+    
+    public EmployeeFactory(){
+        db = new EmployeeBuilder();
+    }
 
     @Override
     public Employee createFromResultSet(ResultSet rs) {
+        db = new EmployeeBuilder();
         db.setEmployeeNo(rs);
         db.setEmployeeBirthDate(rs);
         db.setEmployeeFirstName(rs);

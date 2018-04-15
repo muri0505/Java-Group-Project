@@ -43,6 +43,7 @@ public class EmployeeTable extends HttpServlet {
 
             EmployeesLogic logic = new EmployeesLogic();
             List<Employee> employees = logic.getAllEmployees();
+            
             out.println("<table border=\"1\">");
             out.println("<caption>Employees</caption>");
             out.println("<tr>");

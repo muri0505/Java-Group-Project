@@ -15,8 +15,12 @@ public class DepartmentBuilder {
 
     private static String COL_DEPT_NO = "dept_no";
     private static String COL_DEPT_NAME = "dept_name";
-    private Department department = new Department();
+    private Department department;
 
+    public DepartmentBuilder(){
+        department = new Department();
+    }
+    
     public void build(Map<String, String[]> map) {
         setDeptNo(map);
         setDeptName(map);
@@ -38,6 +42,7 @@ public class DepartmentBuilder {
         try {
             department.setDeptNo(rs.getString(COL_DEPT_NO));
         } catch (SQLException ex) {
+            department.setDeptNo(null);
             Logger.getLogger(DepartmentBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

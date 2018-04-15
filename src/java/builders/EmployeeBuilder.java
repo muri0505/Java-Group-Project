@@ -25,7 +25,11 @@ public class EmployeeBuilder {
     private static String COL_EMPLOYEE_GENDER = "gender";
     private static String COL_EMPLOYEE_HIRE_DATE = "hire_date";
 
-    private Employee employee = new Employee();
+    private Employee employee;
+    
+    public EmployeeBuilder(){
+        employee = new Employee();
+    }
 
     public void build(Map<String, String[]> map) {
         setEmployeeBirthDate(map);
@@ -39,6 +43,7 @@ public class EmployeeBuilder {
         try {
             employee.setEmpNo(rs.getString(COL_EMPLOYEE_NO));
         } catch (SQLException ex) {
+            employee.setEmpNo(null);
             Logger.getLogger(EmployeeBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

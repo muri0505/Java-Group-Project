@@ -24,7 +24,7 @@ public final class DTOFactoryCreator {
     public static <T> Factory<T> getFactory(String factoryName) {
         Factory<T> factory = null;
         try {
-            factory = (Factory< T>) Class.forName(PACKAGE + factoryName + FACTORY).newInstance();
+            factory = (Factory< T>) Class.forName(PACKAGE+factoryName+FACTORY).newInstance();
         } catch (Exception ex) {
             Logger.getLogger(DTOFactoryCreator.class.getName()).log(Level.SEVERE, null, ex);
         }

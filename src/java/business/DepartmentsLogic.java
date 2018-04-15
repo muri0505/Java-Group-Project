@@ -30,6 +30,10 @@ public class DepartmentsLogic {
         validateDepartment(department);
         departmentDAO.addDepartment(department);
     }
+    
+    public Department getDepartmentByDepartmentNo(String DepartmentNo){
+        return departmentDAO.getDepartmentByDepartmentNo(DepartmentNo);
+    }
 
     private void cleanDepartment(Department department) {
         if (department.getDeptNo() != null) {
