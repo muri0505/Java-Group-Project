@@ -90,7 +90,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public void addEmployee(Employee employee) {
-
         try (Connection con = DataSource.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(INSERT_EMPLOYEES);) {
             pstmt.setString(1, newEmpNo());

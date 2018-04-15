@@ -5,7 +5,6 @@
  */
 package view;
 
-import business.EmployeesLogic;
 import business.TitlesLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,14 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import transferobjects.Employee;
 import transferobjects.Title;
 
 /**
  *
- * @author Shariar
+ * @author Owner
  */
-public class EmployeeTable extends HttpServlet {
+public class TitleTable extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,29 +37,25 @@ public class EmployeeTable extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Employee Table</title>");
+            out.println("<title>Title Table</title>");
             out.println("</head>");
             out.println("<body>");
 
-            EmployeesLogic logic = new EmployeesLogic();
-            List<Employee> employees = logic.getAllEmployees();
+            TitlesLogic logic = new TitlesLogic();
+            List<Title> titles = logic.getAllTitles();
             
             out.println("<table border=\"1\">");
-            out.println("<caption>Employees</caption>");
+            out.println("<caption>Titles</caption>");
             out.println("<tr>");
             out.println("<th>emp_no</th>");
-            out.println("<th>birth_date</th>");
-            out.println("<th>first_name</th>");
-            out.println("<th>last_name</th>");
-            out.println("<th>gender</th>");
-            out.println("<th>hire_date</th>");
+            out.println("<th>title</th>");
+            out.println("<th>from_date</th>");
+            out.println("<th>to_date</th>");
             out.println("</tr>");
-            
-            for (Employee employee : employees) {
-                out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
-                        employee.getEmpNo(), employee.getBirthDate(),
-                        employee.getFirstName(), employee.getLastName(),
-                        employee.getGender(), employee.getHireDate());
+            for (Title title : titles) {
+                out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        title.getEmpNo(), title.getTitle(),
+                        title.getFromDate(), title.getToDate());
             }
 
             out.println("</table>");

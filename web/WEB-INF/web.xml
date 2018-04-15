@@ -20,6 +20,22 @@
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>view.Search</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TitleTable</servlet-name>
+        <servlet-class>view.TitleTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SalaryTable</servlet-name>
+        <servlet-class>view.SalaryTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeptManagerTable</servlet-name>
+        <servlet-class>view.DeptManagerTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeptEmployeeTable</servlet-name>
+        <servlet-class>view.DeptEmployeeTable</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Sample1Servlet</servlet-name>
         <url-pattern>/Sample1</url-pattern>
@@ -39,6 +55,22 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TitleTable</servlet-name>
+        <url-pattern>/Title</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SalaryTable</servlet-name>
+        <url-pattern>/Salary</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeptManagerTable</servlet-name>
+        <url-pattern>/DeptManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeptEmployeeTable</servlet-name>
+        <url-pattern>/DeptEmployee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
