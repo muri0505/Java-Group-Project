@@ -44,6 +44,7 @@ public class EmployeeBuilder {
         try {
             employee.setEmpNo(rs.getString(COL_EMPLOYEE_NO));
         } catch (SQLException ex) {
+            employee.setEmpNo(null);
             Logger.getLogger(EmployeeBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

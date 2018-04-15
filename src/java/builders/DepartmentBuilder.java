@@ -42,6 +42,7 @@ public class DepartmentBuilder {
         try {
             department.setDeptNo(rs.getString(COL_DEPT_NO));
         } catch (SQLException ex) {
+            department.setDeptNo(null);
             Logger.getLogger(DepartmentBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

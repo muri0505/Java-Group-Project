@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -111,33 +112,50 @@ public class Search extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
     
-    public void searchEmployee(String inputSearch, HttpServletResponse response ) throws IOException{
+    public Integer checkInteger(String inputSearch){
+        Integer number = null;
+        try{
+            number = Integer.parseInt(inputSearch);
+        }catch(NumberFormatException e){
+            number = null;
+        }
+        return number;
+    }
+    
+    public void searchEmployee(String inputSearch, HttpServletResponse response ) throws IOException{        
         try (PrintWriter out = response.getWriter()) {
             EmployeesLogic elogic = new EmployeesLogic();
-            Employee employee = elogic.getEmployeByEmployeeNo(Integer.parseInt(inputSearch));
+            Employee employee = elogic.getEmployeByEmployeeNo(checkInteger(inputSearch));
             
-            out.println("<table border=\"1\">");
-            out.println("<caption>Employees</caption>");
-            out.println("<tr>");
-            out.println("<th>emp_no</th>");
-            out.println("<th>birth_date</th>");
-            out.println("<th>first_name</th>");
-            out.println("<th>last_name</th>");
-            out.println("<th>gender</th>");
-            out.println("<th>hire_date</th>");
-            out.println("</tr>");
-            out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+            if(employee == null){
+                out.println("Not Found");
+            }else{
+                out.println("<table border=\"1\">");
+                out.println("<caption>Employees</caption>");
+                out.println("<tr>");
+                out.println("<th>emp_no</th>");
+                out.println("<th>birth_date</th>");
+                out.println("<th>first_name</th>");
+                out.println("<th>last_name</th>");
+                out.println("<th>gender</th>");
+                out.println("<th>hire_date</th>");
+                out.println("</tr>");
+                out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
                     employee.getEmpNo(), employee.getBirthDate(),employee.getFirstName(), employee.getLastName(),
                     employee.getGender(), employee.getHireDate());
+            }
         }
     }
     
     public void searchDepartment(String inputSearch, HttpServletResponse response ) throws IOException{
         try (PrintWriter out = response.getWriter()) {
             DepartmentsLogic dlogic = new DepartmentsLogic();
-                Department department = dlogic.getDepartmentByDepartmentNo(inputSearch);
+            Department department = dlogic.getDepartmentByDepartmentNo(inputSearch);
+            
+            if(department == null){
+                out.println("Not Found");
+            }else{
                 out.println("<table border=\"1\">");
                 out.println("<caption>Departments</caption>");
                 out.println("<tr>");
@@ -145,6 +163,7 @@ public class Search extends HttpServlet {
                 out.println("<th>dept_name</th>");
                 out.println("</tr>");
                 out.printf("<tr> <td>%s</td> <td>%s</td></tr>",department.getDeptNo(), department.getDeptName());
+            }
         }
     }
 }

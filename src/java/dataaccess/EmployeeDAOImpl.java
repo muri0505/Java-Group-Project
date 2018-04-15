@@ -90,15 +90,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
     
     public Employee getEmployeByEmployeeNo(Integer EmployeeNo){
-        EmployeeFactory EmployeeFactory = null;
+        EmployeeFactory employeeFactory = null;
         Employee e = null;
         try( Connection con = DataSource.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(SEARCH_EMPLOYEE_ID + "'" + EmployeeNo + "'");
                 ResultSet rs = pstmt.executeQuery();){
             
             while(rs.next()){
-                EmployeeFactory = (EmployeeFactory)DTOFactoryCreator.createBuilder(EmployeeFactory.class);
-                e = EmployeeFactory.createFromResultSet(rs);
+                employeeFactory = (EmployeeFactory)DTOFactoryCreator.createBuilder(EmployeeFactory.class);
+                if (employeeFactory.createFromResultSet(rs).getEmpNo() == null){
+                    e = null;
+                }else{
+                    e = employeeFactory.createFromResultSet(rs);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);

@@ -97,7 +97,11 @@ public class DepartmentDAOImpl implements DepartmentDAO{
             
             while(rs.next()){
                 departmentFactory = (DepartmentFactory)DTOFactoryCreator.createBuilder(DepartmentFactory.class);
-                d = departmentFactory.createFromResultSet(rs);
+                if (departmentFactory.createFromResultSet(rs).getDeptNo() == null){
+                    d = null;
+                }else{
+                    d = departmentFactory.createFromResultSet(rs);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
