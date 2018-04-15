@@ -15,8 +15,7 @@ import transferobjects.Salary;
  * @author Owner
  */
 public class SalaryLogic {
-    private static final int SALARY_NO_MAX_LENGTH = 45;
-    private static final int SALARY_NAME_MAX_LENGTH = 45;
+    private static final int SALARY_DATE = 10;
     
     private SalaryDAO salaryDAO = null;
     
@@ -32,6 +31,10 @@ public class SalaryLogic {
         cleanSalary(salary);
         validateSalary(salary);
         salaryDAO.addSalary(salary);
+    }
+    
+    public List<Salary> getSalaryByEmpNo(Integer empNo){
+        return salaryDAO.getSalaryByEmpNo(empNo);
     }
     
     private void cleanSalary(Salary salary) {
@@ -53,10 +56,10 @@ public class SalaryLogic {
     }
     
     private void validateSalary(Salary salary) {
-        validateString(salary.getEmpNo(), "Employee Number", SALARY_NO_MAX_LENGTH, false);
-        validateString(salary.getSalary(), "Salary", SALARY_NAME_MAX_LENGTH, false);
-        validateString(salary.getFromDate(), "From Date", SALARY_NO_MAX_LENGTH, false);
-        validateString(salary.getToDate(), "To Date", SALARY_NO_MAX_LENGTH, false);
+        //validateString(salary.getEmpNo(), "Employee Number", SALARY_NO_MAX_LENGTH, false);
+        //validateString(salary.getSalary(), "Salary", SALARY_NAME_MAX_LENGTH, false);
+        validateString(salary.getFromDate(), "From Date", SALARY_DATE, false);
+        validateString(salary.getToDate(), "To Date", SALARY_DATE, false);
     }
     
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {

@@ -85,7 +85,7 @@ public class DepartmentDAOImpl implements DepartmentDAO{
     @Override
     public Department getDepartmentByDepartmentNo(String DepartmentNo){
         DepartmentFactory departmentFactory = null;
-        Department d = null;
+        Department department = null;
         try( Connection con = DataSource.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(SEARCH_DEPARTMENT_ID + "'" + DepartmentNo + "'");
                 ResultSet rs = pstmt.executeQuery();){
@@ -93,14 +93,14 @@ public class DepartmentDAOImpl implements DepartmentDAO{
             while(rs.next()){
                 departmentFactory = (DepartmentFactory)DTOFactoryCreator.createBuilder(Department.class);
                 if (departmentFactory.createFromResultSet(rs).getDeptNo() == null){
-                    d = null;
+                    department = null;
                 }else{
-                    d = departmentFactory.createFromResultSet(rs);
+                    department = departmentFactory.createFromResultSet(rs);
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
-        return d;
+        return department;
     }
 }

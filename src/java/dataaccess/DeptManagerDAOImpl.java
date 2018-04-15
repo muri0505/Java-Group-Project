@@ -24,6 +24,8 @@ import transferobjects.DeptManager;
 public class DeptManagerDAOImpl implements DeptManagerDAO{
     private static final String GET_ALL_DEPT_MANGER = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager ORDER BY emp_no LIMIT 100";
     private static final String INSERT_DEPT_MANGER = "INSERT INTO dept_manager (emp_no, dept_no, from_date, to_date) VALUES(?,?,?,?)";
+    private static final String SEARCH_DEPT_MANGER_EMPNO = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager WHERE emp_no = ";
+    private static final String SEARCH_DEPT_MANGER_DEPTNO = "SELECT emp_no, dept_no, from_date, to_date FROM dept_manager WHERE dept_no = ";
     
     @Override
     public List<DeptManager> getAllDeptManagers() {
@@ -84,5 +86,51 @@ public class DeptManagerDAOImpl implements DeptManagerDAO{
         } catch (SQLException ex) {
             Logger.getLogger(DeptManagerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @Override
+    public DeptManager getDeptManagerByEmpNo(Integer empNo){
+        DeptManagerFactory deptManagerFactory = null;
+        DeptManager deptManager = null;
+        try( Connection con = DataSource.getConnection();
+                PreparedStatement pstmt = con.prepareStatement(SEARCH_DEPT_MANGER_EMPNO + "'" + empNo + "'");
+                ResultSet rs = pstmt.executeQuery();){
+            
+            while(rs.next()){
+                deptManagerFactory = (DeptManagerFactory)DTOFactoryCreator.createBuilder(DeptManager.class);
+                if (deptManagerFactory.createFromResultSet(rs).getDeptNo() == null){
+                    deptManager = null;
+                }else{
+                    rs.beforeFirst();
+                    deptManager = deptManagerFactory.createFromResultSet(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return deptManager;
+    }
+    
+    @Override
+    public List<DeptManager> getDeptManagerByDeptNo(String deptNo){
+        DeptManagerFactory deptManagerFactory = null;
+        List<DeptManager> deptManagers = Collections.EMPTY_LIST;
+        
+        try( Connection con = DataSource.getConnection();
+                PreparedStatement pstmt = con.prepareStatement(SEARCH_DEPT_MANGER_DEPTNO + "'" + deptNo + "'");
+                ResultSet rs = pstmt.executeQuery();){
+            
+            while(rs.next()){
+                deptManagerFactory = (DeptManagerFactory)DTOFactoryCreator.createBuilder(DeptManager.class);
+                if (deptManagerFactory.createFromResultSet(rs).getDeptNo() == null){
+                    deptManagers = null;
+                }else{
+                    deptManagers = deptManagerFactory.createListFromResultSet(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return deptManagers;
     }
 }

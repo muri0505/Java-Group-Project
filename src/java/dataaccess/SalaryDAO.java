@@ -16,7 +16,7 @@ public interface SalaryDAO {
     List<Salary> getAllSalaries();
 
     void addSalary(Salary salary);
-    //List<Employee> getEmployeeByFirstName(String firstName);
+    List<Salary> getSalaryByEmpNo(Integer empNo);
     //Title getEmployeByEmployeeNo(Integer EmployeeNo);
     //void updateEmployee(Employee employee);
     //void deleteEmployee(Employee employee);

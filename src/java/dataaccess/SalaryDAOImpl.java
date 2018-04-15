@@ -25,6 +25,7 @@ import transferobjects.Salary;
 public class SalaryDAOImpl implements SalaryDAO{
     private static final String GET_ALL_SALARY = "SELECT emp_no, salary, from_date, to_date FROM salaries ORDER BY emp_no LIMIT 100";
     private static final String INSERT_SALARY = "INSERT INTO salaries (emp_no, salary, from_date, to_date) VALUES(?,?,?,?)";
+    private static final String SEARCH_SALARY_BY_EMPNO = "SELECT emp_no, salary, from_date, to_date FROM salaries WHERE emp_no = ";
     
     @Override
     public List<Salary> getAllSalaries() {
@@ -85,5 +86,28 @@ public class SalaryDAOImpl implements SalaryDAO{
         } catch (SQLException ex) {
             Logger.getLogger(SalaryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @Override
+    public List<Salary> getSalaryByEmpNo(Integer empNo){
+        SalaryFactory salaryFactory = null;
+        List<Salary> salary = null;
+        try (Connection con = DataSource.getConnection();
+                PreparedStatement pstmt = con.prepareStatement(SEARCH_SALARY_BY_EMPNO + "'" + empNo + "'");
+                ResultSet rs = pstmt.executeQuery();) {
+
+            while (rs.next()) {
+                salaryFactory = (SalaryFactory) DTOFactoryCreator.createBuilder(Salary.class);
+                if (salaryFactory.createFromResultSet(rs).getEmpNo() == null) {
+                    salary = null;
+                } else {
+                    rs.beforeFirst();
+                    salary = salaryFactory.createListFromResultSet(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TitleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return salary;
     }
 }

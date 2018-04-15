@@ -12,8 +12,8 @@ import dataaccess.DepartmentDAO;
  */
 public class DepartmentsLogic {
 
-    private static final int DEPARTMENT_NO_MAX_LENGTH = 45;
-    private static final int DEPARTMENT_NAME_MAX_LENGTH = 45;
+    private static final int DEPARTMENT_NO_MAX_LENGTH = 4;
+    private static final int DEPARTMENT_NAME_MAX_LENGTH = 40;
 
     private DepartmentDAO departmentDAO = null;
 
@@ -43,7 +43,6 @@ public class DepartmentsLogic {
         if (department.getDeptName() != null) {
             department.setDeptName(department.getDeptName().trim());
         }
-
     }
 
     private void validateDepartment(Department department) {

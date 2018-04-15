@@ -55,6 +55,7 @@ public class SalaryBuilder {
          try{
              salary.setEmpNo(rs.getString(COL_EMP_NO));
          }catch (SQLException ex) {
+             salary.setEmpNo(null);
              Logger.getLogger(SalaryBuilder.class.getName()).log(Level.SEVERE, null, ex);
          }
      }

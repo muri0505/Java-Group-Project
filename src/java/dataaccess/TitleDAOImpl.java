@@ -24,6 +24,7 @@ import transferobjects.Title;
 public class TitleDAOImpl implements TitleDAO{
     private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no LIMIT 100";
     private static final String INSERT_TITLES = "INSERT INTO titles (emp_no, title, from_date, to_date) VALUES(?,?,?,?)";
+    private static final String SEARCH_TITLE_BY_EMPNO = "SELECT emp_no, title, from_date, to_date FROM titles WHERE emp_no = ";
     
     @Override
     public List<Title> getAllTitles() {
@@ -84,5 +85,28 @@ public class TitleDAOImpl implements TitleDAO{
         } catch (SQLException ex) {
             Logger.getLogger(TitleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @Override
+    public List<Title> getTitleByEmployeeNo(Integer empNo){
+        TitleFactory titleFactory = null;
+        List<Title> title = null;
+        try (Connection con = DataSource.getConnection();
+                PreparedStatement pstmt = con.prepareStatement(SEARCH_TITLE_BY_EMPNO + "'" + empNo + "'");
+                ResultSet rs = pstmt.executeQuery();) {
+
+            while (rs.next()) {
+                titleFactory = (TitleFactory) DTOFactoryCreator.createBuilder(Title.class);
+                if (titleFactory.createFromResultSet(rs).getEmpNo() == null) {
+                    title = null;
+                } else {
+                    rs.beforeFirst();
+                    title = titleFactory.createListFromResultSet(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TitleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return title;
     }
 }

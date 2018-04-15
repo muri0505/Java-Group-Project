@@ -54,6 +54,7 @@ public class TitleBuilder {
          try{
              title.setEmpNo(rs.getString(COL_EMP_NO));
          }catch (SQLException ex) {
+             title.setEmpNo(null);
              Logger.getLogger(TitleBuilder.class.getName()).log(Level.SEVERE, null, ex);
          }
      }

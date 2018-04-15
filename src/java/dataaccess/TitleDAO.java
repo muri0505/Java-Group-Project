@@ -18,7 +18,7 @@ public interface TitleDAO {
 
     void addTitle(Title title);
     //List<Employee> getEmployeeByFirstName(String firstName);
-    //Title getEmployeByEmployeeNo(Integer EmployeeNo);
+    List<Title> getTitleByEmployeeNo(Integer EmployeeNo);
     //void updateEmployee(Employee employee);
     //void deleteEmployee(Employee employee);
 }

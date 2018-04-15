@@ -12,8 +12,10 @@ import dataaccess.EmployeeDAO;
  */
 public class EmployeesLogic {
 
-    private static final int EMPLOYEE_NO_MAX_LENGTH = 45;
-    private static final int EMPLOYEE_NAME_MAX_LENGTH = 45;
+    private static final int EMPLOYEE_GENDER_MAX_LENGTH = 1;
+    private static final int EMPLOYEE_FIRST_NAME_MAX_LENGTH = 14;
+    private static final int EMPLOYEE_LAST_NAME_MAX_LENGTH = 16;
+    private static final int EMPLOYEE_DATE_MAX_LENGTH = 10;
 
     private EmployeeDAO employeeDAO = null;
 
@@ -31,8 +33,8 @@ public class EmployeesLogic {
         employeeDAO.addEmployee(employee);
     }
     
-    public Employee getEmployeByEmployeeNo(Integer EmployeeNo){
-        return employeeDAO.getEmployeByEmployeeNo(EmployeeNo);
+    public Employee getEmployeeByEmployeeNo(Integer EmployeeNo){
+        return employeeDAO.getEmployeeByEmployeeNo(EmployeeNo);
     }
 
     private void cleanEmployee(Employee employee) {
@@ -63,11 +65,11 @@ public class EmployeesLogic {
 
     private void validateEmployee(Employee employee) {
         //validateString(employee.getEmpNo(), "Employee Number", EMPLOYEE_NO_MAX_LENGTH, false);
-        validateString(employee.getBirthDate(), "Birth Date", EMPLOYEE_NAME_MAX_LENGTH, false);
-        validateString(employee.getFirstName(), "First Name", EMPLOYEE_NAME_MAX_LENGTH, false);
-        validateString(employee.getLastName(), "Last Name", EMPLOYEE_NAME_MAX_LENGTH, false);
-        validateString(employee.getGender(), "Gender", EMPLOYEE_NAME_MAX_LENGTH, false);
-        validateString(employee.getHireDate(), "Hire Date", EMPLOYEE_NAME_MAX_LENGTH, false);
+        validateString(employee.getBirthDate(), "Birth Date", EMPLOYEE_DATE_MAX_LENGTH, false);
+        validateString(employee.getFirstName(), "First Name", EMPLOYEE_FIRST_NAME_MAX_LENGTH, false);
+        validateString(employee.getLastName(), "Last Name", EMPLOYEE_LAST_NAME_MAX_LENGTH, false);
+        validateString(employee.getGender(), "Gender", EMPLOYEE_GENDER_MAX_LENGTH, false);
+        validateString(employee.getHireDate(), "Hire Date", EMPLOYEE_DATE_MAX_LENGTH, false);
     }
 
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {

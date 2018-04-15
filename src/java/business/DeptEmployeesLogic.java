@@ -15,8 +15,8 @@ import transferobjects.DeptEmployee;
  * @author Owner
  */
 public class DeptEmployeesLogic {
-    private static final int DEPT_EMPLOYEE_NO_MAX_LENGTH = 45;
-    private static final int DEPT_EMPLOYEE_NAME_MAX_LENGTH = 45;
+    private static final int DEPT_EMPLOYEE_DEPTNO = 45;
+    private static final int DEPT_EMPLOYEE_DATE = 10;
     
     private DeptEmployeeDAO deptEmployeeDAO = null;
     
@@ -32,6 +32,14 @@ public class DeptEmployeesLogic {
         cleanDeptEmployee(deptEmployee);
         validateDeptEmployee(deptEmployee);
         deptEmployeeDAO.addDeptEmployee(deptEmployee);
+    }
+    
+    public DeptEmployee getDeptEmployeeByEmpNo(Integer EmpNo){
+        return deptEmployeeDAO.getDeptEmployeeByEmpNo(EmpNo);
+    }
+    
+    public List<DeptEmployee> getDeptEmployeeByDeptNo(String deptNo){
+        return deptEmployeeDAO.getDeptEmployeeByDeptNo(deptNo);
     }
     
     private void cleanDeptEmployee(DeptEmployee deptEmployee) {
@@ -53,10 +61,10 @@ public class DeptEmployeesLogic {
     }
     
     private void validateDeptEmployee(DeptEmployee deptEmployee) {
-        validateString(deptEmployee.getEmpNo(), "Employee Number", DEPT_EMPLOYEE_NO_MAX_LENGTH, false);
-        validateString(deptEmployee.getDeptNo(), "Department Number", DEPT_EMPLOYEE_NO_MAX_LENGTH, false);
-        validateString(deptEmployee.getFromDate(), "From Date", DEPT_EMPLOYEE_NO_MAX_LENGTH, false);
-        validateString(deptEmployee.getToDate(), "To Date", DEPT_EMPLOYEE_NO_MAX_LENGTH, false);
+        //validateString(deptEmployee.getEmpNo(), "Employee Number", DEPT_EMPLOYEE_NO_MAX_LENGTH, false);
+        validateString(deptEmployee.getDeptNo(), "Department Number", DEPT_EMPLOYEE_DEPTNO, false);
+        validateString(deptEmployee.getFromDate(), "From Date", DEPT_EMPLOYEE_DATE, false);
+        validateString(deptEmployee.getToDate(), "To Date", DEPT_EMPLOYEE_DATE, false);
     }
     
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {

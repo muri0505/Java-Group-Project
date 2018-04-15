@@ -15,8 +15,8 @@ import transferobjects.Title;
  * @author Owner
  */
 public class TitlesLogic {
-    private static final int TITLE_NO_MAX_LENGTH = 45;
-    private static final int TITLE_NAME_MAX_LENGTH = 45;
+    private static final int TITLE_LENGTH = 50;
+    private static final int TITLE_DATE = 10;
     
     private TitleDAO titleDAO = null;
     
@@ -32,6 +32,10 @@ public class TitlesLogic {
         cleanTitle(title);
         validateTitle(title);
         titleDAO.addTitle(title);
+    }
+    
+    public List<Title> getTitleByEmployeeNo(Integer empNo){
+        return titleDAO.getTitleByEmployeeNo(empNo);
     }
     
     private void cleanTitle(Title title) {
@@ -53,10 +57,10 @@ public class TitlesLogic {
     }
     
     private void validateTitle(Title title) {
-        validateString(title.getEmpNo(), "Employee Number", TITLE_NO_MAX_LENGTH, false);
-        validateString(title.getTitle(), "Title", TITLE_NAME_MAX_LENGTH, false);
-        validateString(title.getFromDate(), "From Date", TITLE_NO_MAX_LENGTH, false);
-        validateString(title.getToDate(), "To Date", TITLE_NO_MAX_LENGTH, false);
+        //validateString(title.getEmpNo(), "Employee Number", TITLE_NO_MAX_LENGTH, false);
+        validateString(title.getTitle(), "Title", TITLE_LENGTH, false);
+        validateString(title.getFromDate(), "From Date", TITLE_DATE, false);
+        validateString(title.getToDate(), "To Date", TITLE_DATE, false);
     }
     
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {

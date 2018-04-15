@@ -15,8 +15,8 @@ import transferobjects.DeptManager;
  * @author Owner
  */
 public class DeptManagersLogic {
-    private static final int DEPT_MANAGER_NO_MAX_LENGTH = 45;
-    private static final int DEPT_MANAGER_NAME_MAX_LENGTH = 45;
+    private static final int DEPT_MANAGER_DEPT = 4;
+    private static final int DEPT_MANAGER_DATE = 10;
     
     private DeptManagerDAO deptManagerDAO = null;
     
@@ -32,6 +32,14 @@ public class DeptManagersLogic {
         cleanDeptManager(deptManager);
         validateDeptManager(deptManager);
         deptManagerDAO.addDeptManager(deptManager);
+    }
+    
+    public DeptManager getDeptManagerByEmpNo(Integer EmpNo){
+        return deptManagerDAO.getDeptManagerByEmpNo(EmpNo);
+    }
+    
+    public List<DeptManager> getDeptManagerByDeptNo(String deptNo){
+        return deptManagerDAO.getDeptManagerByDeptNo(deptNo);
     }
     
     private void cleanDeptManager(DeptManager deptManager) {
@@ -53,10 +61,10 @@ public class DeptManagersLogic {
     }
     
     private void validateDeptManager(DeptManager deptManager) {
-        validateString(deptManager.getEmpNo(), "Employee Number", DEPT_MANAGER_NO_MAX_LENGTH, false);
-        validateString(deptManager.getDeptNo(), "Department Number", DEPT_MANAGER_NO_MAX_LENGTH, false);
-        validateString(deptManager.getFromDate(), "From Date", DEPT_MANAGER_NO_MAX_LENGTH, false);
-        validateString(deptManager.getToDate(), "To Date", DEPT_MANAGER_NO_MAX_LENGTH, false);
+        //validateString(deptManager.getEmpNo(), "Employee Number", DEPT_MANAGER_NO_MAX_LENGTH, false);
+        validateString(deptManager.getDeptNo(), "Department Number", DEPT_MANAGER_DEPT, false);
+        validateString(deptManager.getFromDate(), "From Date", DEPT_MANAGER_DATE, false);
+        validateString(deptManager.getToDate(), "To Date", DEPT_MANAGER_DATE, false);
     }
     
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {

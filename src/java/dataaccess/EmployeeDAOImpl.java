@@ -105,9 +105,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public Employee getEmployeByEmployeeNo(Integer EmployeeNo) {
+    public Employee getEmployeeByEmployeeNo(Integer EmployeeNo) {
         EmployeeFactory employeeFactory = null;
-        Employee e = null;
+        Employee employee = null;
         try (Connection con = DataSource.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(SEARCH_EMPLOYEE_ID + "'" + EmployeeNo + "'");
                 ResultSet rs = pstmt.executeQuery();) {
@@ -115,15 +115,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             while (rs.next()) {
                 employeeFactory = (EmployeeFactory) DTOFactoryCreator.createBuilder(Employee.class);
                 if (employeeFactory.createFromResultSet(rs).getEmpNo() == null) {
-                    e = null;
+                    employee = null;
                 } else {
-                    e = employeeFactory.createFromResultSet(rs);
+                    rs.beforeFirst();
+                    employee = employeeFactory.createFromResultSet(rs);
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return e;
+        return employee;
     }
 
 }

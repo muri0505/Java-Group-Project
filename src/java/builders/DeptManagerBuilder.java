@@ -55,6 +55,7 @@ public class DeptManagerBuilder {
          try{
              deptManager.setEmpNo(rs.getString(COL_EMP_NO));
          }catch (SQLException ex) {
+             deptManager.setEmpNo(null);
              Logger.getLogger(DeptManagerBuilder.class.getName()).log(Level.SEVERE, null, ex);
          }
      }
@@ -63,6 +64,7 @@ public class DeptManagerBuilder {
          try{
              deptManager.setDeptNo(rs.getString(COL_DEPT_NO));
          }catch (SQLException ex) {
+             deptManager.setDeptNo(null);
              Logger.getLogger(DeptManagerBuilder.class.getName()).log(Level.SEVERE, null, ex);
          }
      }

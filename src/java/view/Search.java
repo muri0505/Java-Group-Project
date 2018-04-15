@@ -6,10 +6,15 @@
 package view;
 
 import business.DepartmentsLogic;
+import business.DeptEmployeesLogic;
+import business.DeptManagersLogic;
 import business.EmployeesLogic;
+import business.SalaryLogic;
+import business.TitlesLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
@@ -17,7 +22,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transferobjects.Department;
+import transferobjects.DeptEmployee;
+import transferobjects.DeptManager;
 import transferobjects.Employee;
+import transferobjects.Salary;
+import transferobjects.Title;
 
 /**
  *
@@ -53,6 +62,10 @@ public class Search extends HttpServlet {
                     + "<option value=\"Table\">Select a Table</option>"
                     + "<option value=\"Employee\">Employee</option>"
                     + "<option value=\"Department\">Department</option>"
+                    + "<option value=\"DeptManager\">DeptManager</option>"
+                    + "<option value=\"DeptEmployee\">DeptEmployee</option>"
+                    + "<option value=\"Title\">Title</option>"
+                    + "<option value=\"Salary\">Salary</option>"
                     + "</select>");
             out.println("<input type=\"submit\" value=\"Submit\"><br><br>");
             
@@ -68,12 +81,25 @@ public class Search extends HttpServlet {
                 if("Department".equals(request.getParameter("table"))){
                     searchDepartment(inputSearch,response);
                 }
+                if("DeptManager".equals(request.getParameter("table"))){
+                    searchDeptManager(inputSearch,response);
+                }
+                if("DeptEmployee".equals(request.getParameter("table"))){
+                    searchDeptEmployee(inputSearch,response);
+                }
+                if("Title".equals(request.getParameter("table"))){
+                    searchTitle(inputSearch,response);
+                }
+                if("Salary".equals(request.getParameter("table"))){
+                    searchSalary(inputSearch,response);
             }
-            
+                
             out.println("</body>");
             out.println("</html>");
+            }
         }
     }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -111,8 +137,7 @@ public class Search extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-    
+    }// </editor-fold>    
     public Integer checkInteger(String inputSearch){
         Integer number = null;
         try{
@@ -123,13 +148,17 @@ public class Search extends HttpServlet {
         return number;
     }
     
+    public boolean isInteger(Integer number){
+        return (number != null) ? true:false; 
+    }
+    
     public void searchEmployee(String inputSearch, HttpServletResponse response ) throws IOException{        
         try (PrintWriter out = response.getWriter()) {
             EmployeesLogic elogic = new EmployeesLogic();
-            Employee employee = elogic.getEmployeByEmployeeNo(checkInteger(inputSearch));
+            Employee employee = elogic.getEmployeeByEmployeeNo(checkInteger(inputSearch));
             
             if(employee == null){
-                out.println("Not Found");
+                out.println("Not Found in Employee Table");
             }else{
                 out.println("<table border=\"1\">");
                 out.println("<caption>Employees</caption>");
@@ -154,7 +183,7 @@ public class Search extends HttpServlet {
             Department department = dlogic.getDepartmentByDepartmentNo(inputSearch);
             
             if(department == null){
-                out.println("Not Found");
+                out.println("Not Found in Department Table");
             }else{
                 out.println("<table border=\"1\">");
                 out.println("<caption>Departments</caption>");
@@ -166,4 +195,159 @@ public class Search extends HttpServlet {
             }
         }
     }
+        
+    public void searchDeptEmployee(String inputSearch, HttpServletResponse response)throws IOException{
+        try (PrintWriter out = response.getWriter()) {
+            DeptEmployeesLogic logic = new DeptEmployeesLogic();
+            
+            if (isInteger(checkInteger(inputSearch))){
+                DeptEmployee deptEmployee = logic.getDeptEmployeeByEmpNo(checkInteger(inputSearch));
+                if(deptEmployee == null){
+                    out.println("Not Found in DeptEmployee Table");
+                }else{
+                    out.println("<table border=\"1\">");
+                    out.println("<caption>DeptEmployees</caption>");
+                    out.println("<tr>");
+                    out.println("<th>emp_no</th>");
+                    out.println("<th>detp_no</th>");
+                    out.println("<th>from_date</th>");
+                    out.println("<th>to_date</th>");
+                    out.println("</tr>");
+                    out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        deptEmployee.getEmpNo(), deptEmployee.getDeptNo(),
+                        deptEmployee.getFromDate(), deptEmployee.getToDate());
+            
+                    out.println("</table>");
+                    out.println("</body>");
+                    out.println("</html>");
+                }
+            }else{
+                List<DeptEmployee> deptEmployees = logic.getDeptEmployeeByDeptNo(inputSearch);
+                
+                if(deptEmployees.isEmpty()){
+                    out.println("Not Found in DeptEmployee Table");
+                }else{
+                    out.println("<table border=\"1\">");
+                    out.println("<caption>DeptEmployees</caption>");
+                    out.println("<tr>");
+                    out.println("<th>emp_no</th>");
+                    out.println("<th>detp_no</th>");
+                    out.println("<th>from_date</th>");
+                    out.println("<th>to_date</th>");
+                    out.println("</tr>");
+                    for (DeptEmployee deptEmployee : deptEmployees) {
+                        out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        deptEmployee.getEmpNo(), deptEmployee.getDeptNo(),
+                        deptEmployee.getFromDate(), deptEmployee.getToDate());
+                    }
+                    out.println("</table>");
+                    out.println("</body>");
+                    out.println("</html>");
+                }
+            }
+        }
+    }
+    
+    public void  searchDeptManager(String inputSearch, HttpServletResponse response)throws IOException{
+        try (PrintWriter out = response.getWriter()) {
+            DeptManagersLogic logic = new DeptManagersLogic();
+            
+            if (isInteger(checkInteger(inputSearch))){
+                DeptManager deptManager = logic.getDeptManagerByEmpNo(checkInteger(inputSearch));
+                if(deptManager == null){
+                    out.println("Not Found in DeptManager");
+                }else{
+                    out.println("<table border=\"1\">");
+                    out.println("<caption>DeptManager</caption>");
+                    out.println("<tr>");
+                    out.println("<th>emp_no</th>");
+                    out.println("<th>detp_no</th>");
+                    out.println("<th>from_date</th>");
+                    out.println("<th>to_date</th>");
+                    out.println("</tr>");
+                    out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        deptManager.getEmpNo(), deptManager.getDeptNo(),
+                        deptManager.getFromDate(), deptManager.getToDate());
+                    out.println("</table>");
+                    out.println("</body>");
+                    out.println("</html>");
+                }
+            }else{
+                List<DeptManager> deptManagers = logic.getDeptManagerByDeptNo(inputSearch);
+                
+                if(deptManagers.isEmpty()){
+                    out.println("Not Found in DeptManager");
+                }else{
+                    out.println("<table border=\"1\">");
+                    out.println("<caption>DeptManagers</caption>");
+                    out.println("<tr>");
+                    out.println("<th>emp_no</th>");
+                    out.println("<th>detp_no</th>");
+                    out.println("<th>from_date</th>");
+                    out.println("<th>to_date</th>");
+                    out.println("</tr>");
+                    for (DeptManager deptManager: deptManagers) {
+                        out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        deptManager.getEmpNo(), deptManager.getDeptNo(),
+                        deptManager.getFromDate(), deptManager.getToDate());
+                    }
+                    out.println("</table>");
+                    out.println("</body>");
+                    out.println("</html>");
+                }
+            }
+        }
+    }
+    
+    public void searchTitle(String inputSearch, HttpServletResponse response ) throws IOException{        
+        try (PrintWriter out = response.getWriter()) {
+            TitlesLogic logic = new TitlesLogic();
+            List<Title> titles = logic.getTitleByEmployeeNo(checkInteger(inputSearch));
+            
+            if(titles == null){
+                out.println("Not Found in Title");
+            }else{
+                out.println("<table border=\"1\">");
+                out.println("<caption>Titles</caption>");
+                out.println("<tr>");
+                out.println("<th>emp_no</th>");
+                out.println("<th>title</th>");
+                out.println("<th>from_date</th>");
+                out.println("<th>to_date</th>");
+                out.println("</tr>");
+                
+                for(Title title: titles)
+                out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        title.getEmpNo(), title.getTitle(),
+                        title.getFromDate(), title.getToDate());
+            }
+        }
+    }
+    
+    public void searchSalary(String inputSearch, HttpServletResponse response ) throws IOException{        
+        try (PrintWriter out = response.getWriter()) {
+            SalaryLogic logic = new SalaryLogic();
+            List<Salary> salaries = logic.getSalaryByEmpNo(checkInteger(inputSearch));
+            
+            if(salaries == null){
+                out.println("Not Found in Salary");
+            }else{
+                out.println("<table border=\"1\">");
+                out.println("<caption>Salaries</caption>");
+                out.println("<tr>");
+                out.println("<th>emp_no</th>");
+                out.println("<th>title</th>");
+                out.println("<th>from_date</th>");
+                out.println("<th>to_date</th>");
+                out.println("</tr>");
+                
+                for(Salary salary: salaries)
+                out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
+                        salary.getEmpNo(), salary.getSalary(),
+                        salary.getFromDate(), salary.getToDate());
+            }
+        }
+    }
+    
+    
 }
