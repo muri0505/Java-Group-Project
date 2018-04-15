@@ -18,7 +18,7 @@ import transferobjects.Employee;
  */
 public class EmployeeBuilder {
 
-    private static String COL_EMPLOYEE_NO = "dept_no";
+    private static String COL_EMPLOYEE_NO = "emp_no";
     private static String COL_EMPLOYEE_BIRTH_DATE = "birth_date";
     private static String COL_EMPLOYEE_FIRST_NAME = "first_name";
     private static String COL_EMPLOYEE_LAST_NAME = "last_name";
@@ -28,7 +28,6 @@ public class EmployeeBuilder {
     private Employee employee = new Employee();
 
     public void build(Map<String, String[]> map) {
-        setEmployeeNo(map);
         setEmployeeBirthDate(map);
         setEmployeeFirstName(map);
         setEmployeeLastName(map);
@@ -57,7 +56,7 @@ public class EmployeeBuilder {
     }
 
     public void setEmployeeBirthDate(Map<String, String[]> map) {
-        employee.setBirthDate(map.get("birth_date")[1]);
+        employee.setBirthDate(map.get("birth_date")[0]);
     }
 
     public void setEmployeeFirstName(ResultSet rs) {
@@ -69,7 +68,7 @@ public class EmployeeBuilder {
     }
 
     public void setEmployeeFirstName(Map<String, String[]> map) {
-        employee.setFirstName(map.get("first_name")[2]);
+        employee.setFirstName(map.get("first_name")[0]);
     }
 
     public void setEmployeeLastName(ResultSet rs) {
@@ -81,7 +80,7 @@ public class EmployeeBuilder {
     }
 
     public void setEmployeeLastName(Map<String, String[]> map) {
-        employee.setLastName(map.get("last_name")[3]);
+        employee.setLastName(map.get("last_name")[0]);
     }
 
     public void setEmployeeGender(ResultSet rs) {
@@ -93,7 +92,7 @@ public class EmployeeBuilder {
     }
 
     public void setEmployeeGender(Map<String, String[]> map) {
-        employee.setGender(map.get("gender")[3]);
+        employee.setGender(map.get("gender")[0]);
     }
 
     public void setEmployeeHireDate(ResultSet rs) {
@@ -105,7 +104,7 @@ public class EmployeeBuilder {
     }
 
     public void setEmployeeHireDate(Map<String, String[]> map) {
-        employee.setHireDate(map.get("hire_date")[1]);
+        employee.setHireDate(map.get("hire_date")[0]);
     }
 
     public Employee getEmployee() {

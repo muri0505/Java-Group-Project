@@ -59,7 +59,7 @@ public class EmployeesLogic {
     }
 
     private void validateEmployee(Employee employee) {
-        validateString(employee.getEmpNo(), "Employee Number", EMPLOYEE_NO_MAX_LENGTH, false);
+        //validateString(employee.getEmpNo(), "Employee Number", EMPLOYEE_NO_MAX_LENGTH, false);
         validateString(employee.getBirthDate(), "Birth Date", EMPLOYEE_NAME_MAX_LENGTH, false);
         validateString(employee.getFirstName(), "First Name", EMPLOYEE_NAME_MAX_LENGTH, false);
         validateString(employee.getLastName(), "Last Name", EMPLOYEE_NAME_MAX_LENGTH, false);

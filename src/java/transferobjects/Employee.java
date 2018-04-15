@@ -19,7 +19,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String birth_date, String first_name, String last_name, String gender, String hire_date) {
+    public Employee(String emp_no, String birth_date, String first_name, String last_name, String gender, String hire_date) {
         setBirthDate(birth_date);
         setFirstName(first_name);
         setLastName(last_name);
