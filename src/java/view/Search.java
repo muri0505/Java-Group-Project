@@ -70,6 +70,7 @@ public class Search extends HttpServlet {
             out.println("<input type=\"submit\" value=\"Submit\"><br><br>");
             
             String inputSearch = request.getParameter("search");
+            
             if(inputSearch.isEmpty()){
                 out.println("please enter id");
             }else if ("Table".equals(request.getParameter("table"))){
@@ -93,7 +94,7 @@ public class Search extends HttpServlet {
                 if("Salary".equals(request.getParameter("table"))){
                     searchSalary(inputSearch,response);
             }
-                
+               
             out.println("</body>");
             out.println("</html>");
             }
@@ -158,10 +159,10 @@ public class Search extends HttpServlet {
             Employee employee = elogic.getEmployeeByEmployeeNo(checkInteger(inputSearch));
             
             if(employee == null){
-                out.println("Not Found in Employee Table");
+                out.println(inputSearch +" Not Found in Employee ");
             }else{
+                out.println("Search " + inputSearch + " in Employee <br>");
                 out.println("<table border=\"1\">");
-                out.println("<caption>Employees</caption>");
                 out.println("<tr>");
                 out.println("<th>emp_no</th>");
                 out.println("<th>birth_date</th>");
@@ -183,10 +184,10 @@ public class Search extends HttpServlet {
             Department department = dlogic.getDepartmentByDepartmentNo(inputSearch);
             
             if(department == null){
-                out.println("Not Found in Department Table");
+                out.println(inputSearch +" Not Found in Department ");
             }else{
+                out.println("Search " + inputSearch + " in Department <br>");
                 out.println("<table border=\"1\">");
-                out.println("<caption>Departments</caption>");
                 out.println("<tr>");
                 out.println("<th>dept_no</th>");
                 out.println("<th>dept_name</th>");
@@ -203,10 +204,10 @@ public class Search extends HttpServlet {
             if (isInteger(checkInteger(inputSearch))){
                 DeptEmployee deptEmployee = logic.getDeptEmployeeByEmpNo(checkInteger(inputSearch));
                 if(deptEmployee == null){
-                    out.println("Not Found in DeptEmployee Table");
+                    out.println(inputSearch+ " Not Found in DeptEmployee ");
                 }else{
+                    out.println("Search " + inputSearch + " in DeptEmployee <br>");
                     out.println("<table border=\"1\">");
-                    out.println("<caption>DeptEmployees</caption>");
                     out.println("<tr>");
                     out.println("<th>emp_no</th>");
                     out.println("<th>detp_no</th>");
@@ -225,10 +226,10 @@ public class Search extends HttpServlet {
                 List<DeptEmployee> deptEmployees = logic.getDeptEmployeeByDeptNo(inputSearch);
                 
                 if(deptEmployees.isEmpty()){
-                    out.println("Not Found in DeptEmployee Table");
+                    out.println(inputSearch+" Not Found in DeptEmployee ");
                 }else{
+                    out.println("Search " + inputSearch + " in DeptEmployee <br>");
                     out.println("<table border=\"1\">");
-                    out.println("<caption>DeptEmployees</caption>");
                     out.println("<tr>");
                     out.println("<th>emp_no</th>");
                     out.println("<th>detp_no</th>");
@@ -255,10 +256,10 @@ public class Search extends HttpServlet {
             if (isInteger(checkInteger(inputSearch))){
                 DeptManager deptManager = logic.getDeptManagerByEmpNo(checkInteger(inputSearch));
                 if(deptManager == null){
-                    out.println("Not Found in DeptManager");
+                    out.println(inputSearch+" Not Found in DeptManager");
                 }else{
+                    out.println("Search " + inputSearch + " in DeptManager <br>");
                     out.println("<table border=\"1\">");
-                    out.println("<caption>DeptManager</caption>");
                     out.println("<tr>");
                     out.println("<th>emp_no</th>");
                     out.println("<th>detp_no</th>");
@@ -276,10 +277,10 @@ public class Search extends HttpServlet {
                 List<DeptManager> deptManagers = logic.getDeptManagerByDeptNo(inputSearch);
                 
                 if(deptManagers.isEmpty()){
-                    out.println("Not Found in DeptManager");
+                    out.println(inputSearch+" Not Found in DeptManager");
                 }else{
+                    out.println("Search " + inputSearch + " in DeptManager <br>");
                     out.println("<table border=\"1\">");
-                    out.println("<caption>DeptManagers</caption>");
                     out.println("<tr>");
                     out.println("<th>emp_no</th>");
                     out.println("<th>detp_no</th>");
@@ -305,10 +306,10 @@ public class Search extends HttpServlet {
             List<Title> titles = logic.getTitleByEmployeeNo(checkInteger(inputSearch));
             
             if(titles == null){
-                out.println("Not Found in Title");
+                out.println(inputSearch+" Not Found in Title");
             }else{
+                out.println("Search " + inputSearch + " in Title <br>");
                 out.println("<table border=\"1\">");
-                out.println("<caption>Titles</caption>");
                 out.println("<tr>");
                 out.println("<th>emp_no</th>");
                 out.println("<th>title</th>");
@@ -330,10 +331,10 @@ public class Search extends HttpServlet {
             List<Salary> salaries = logic.getSalaryByEmpNo(checkInteger(inputSearch));
             
             if(salaries == null){
-                out.println("Not Found in Salary");
+                out.println(inputSearch+" Not Found in Salary");
             }else{
+                out.println("Search " + inputSearch + " in Salary <br>");
                 out.println("<table border=\"1\">");
-                out.println("<caption>Salaries</caption>");
                 out.println("<tr>");
                 out.println("<th>emp_no</th>");
                 out.println("<th>title</th>");

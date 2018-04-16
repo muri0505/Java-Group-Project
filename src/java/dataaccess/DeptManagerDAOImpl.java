@@ -101,7 +101,6 @@ public class DeptManagerDAOImpl implements DeptManagerDAO{
                 if (deptManagerFactory.createFromResultSet(rs).getDeptNo() == null){
                     deptManager = null;
                 }else{
-                    rs.beforeFirst();
                     deptManager = deptManagerFactory.createFromResultSet(rs);
                 }
             }
@@ -125,6 +124,7 @@ public class DeptManagerDAOImpl implements DeptManagerDAO{
                 if (deptManagerFactory.createFromResultSet(rs).getDeptNo() == null){
                     deptManagers = null;
                 }else{
+                    rs.beforeFirst();
                     deptManagers = deptManagerFactory.createListFromResultSet(rs);
                 }
             }

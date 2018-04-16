@@ -117,7 +117,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 if (employeeFactory.createFromResultSet(rs).getEmpNo() == null) {
                     employee = null;
                 } else {
-                    rs.beforeFirst();
                     employee = employeeFactory.createFromResultSet(rs);
                 }
             }
