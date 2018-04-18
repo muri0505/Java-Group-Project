@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>Sample1Servlet</servlet-name>
-        <servlet-class>view.Sample1Servlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EmployeeServlet</servlet-name>
         <servlet-class>view.EmployeeTable</servlet-class>
     </servlet>
@@ -36,10 +32,6 @@
         <servlet-name>DeptEmployeeTable</servlet-name>
         <servlet-class>view.DeptEmployeeTable</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Sample1Servlet</servlet-name>
-        <url-pattern>/Sample1</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EmployeeServlet</servlet-name>
         <url-pattern>/Employee</url-pattern>

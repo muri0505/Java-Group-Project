@@ -106,6 +106,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeByEmployeeNo(Integer EmployeeNo) {
+        
         EmployeeFactory employeeFactory = null;
         Employee employee = null;
         try (Connection con = DataSource.getConnection();
