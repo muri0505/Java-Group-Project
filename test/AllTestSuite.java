@@ -18,10 +18,11 @@ import org.junit.runners.Suite.SuiteClasses;
  * 4</a>
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({transferobjects.DeptManagerTest.class,
-    transferobjects.TitleTest.class, transferobjects.DepartmentTest.class,
-    transferobjects.EmployeeTest.class, transferobjects.DeptEmployeeTest.class,
-    transferobjects.SalaryTest.class,
+@Suite.SuiteClasses({
+    transferobjects.TitleTest.class, 
+    business.TitlesLogicTest.class,
+    transferobjects.EmployeeTest.class, 
+    dataaccess.TitleDAOImplTest.class
     })
 public class AllTestSuite {
 

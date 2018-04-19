@@ -25,6 +25,11 @@ public class TitlesLogic {
         titleDAO = new TitleDAOImpl();
     }
 
+    /**
+     * calls dao and returns a list of all titles
+     *
+     * @return
+     */
     public List<Title> getAllTitles() {
         return titleDAO.getAllTitles();
     }
