@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package transferobjects;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -16,17 +14,9 @@ import static org.junit.Assert.*;
  *
  * @author shican
  */
-public class DepartmentTableTest {
+public class DepartmentTest {
     
-    public DepartmentTableTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
+    public DepartmentTest() {
     }
     
     @Before
@@ -38,7 +28,19 @@ public class DepartmentTableTest {
     }
 
     @Test
-    public void testGetServletInfo() {
+    public void testSetDeptNo() {
+    }
+
+    @Test
+    public void testGetDeptNo() {
+    }
+
+    @Test
+    public void testSetDeptName() {
+    }
+
+    @Test
+    public void testGetDeptName() {
     }
     
 }

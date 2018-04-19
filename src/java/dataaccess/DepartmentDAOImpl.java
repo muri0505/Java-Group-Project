@@ -46,7 +46,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
             pstmt = con.prepareStatement(GET_ALL_DEPARTMENTS);
             rs = pstmt.executeQuery();
 
-            department = (DepartmentFactory) DTOFactoryCreator.createBuilder(Department.class);
+            department = DTOFactoryCreator.createBuilder(Department.class);
             departments = department.createListFromResultSet(rs);
 
         } catch (SQLException ex) {

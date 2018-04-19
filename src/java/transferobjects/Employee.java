@@ -1,6 +1,7 @@
 package transferobjects;
 
 import java.sql.Date;
+import java.util.Objects;
 
 /**
  * transfer object for Employee
@@ -35,6 +36,7 @@ public class Employee {
         setLastName(last_name);
         setGender(gender);
         setHireDate(hire_date);
+        setEmpNo(emp_no);
     }
 
     public void setEmpNo(String emp_no) {
@@ -83,6 +85,51 @@ public class Employee {
 
     public String getHireDate() {
         return hire_date;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.emp_no);
+        hash = 89 * hash + Objects.hashCode(this.birth_date);
+        hash = 89 * hash + Objects.hashCode(this.first_name);
+        hash = 89 * hash + Objects.hashCode(this.last_name);
+        hash = 89 * hash + Objects.hashCode(this.gender);
+        hash = 89 * hash + Objects.hashCode(this.hire_date);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Employee other = (Employee) obj;
+        if (!Objects.equals(this.emp_no, other.emp_no)) {
+            return false;
+        }
+        if (!Objects.equals(this.birth_date, other.birth_date)) {
+            return false;
+        }
+        if (!Objects.equals(this.first_name, other.first_name)) {
+            return false;
+        }
+        if (!Objects.equals(this.last_name, other.last_name)) {
+            return false;
+        }
+        if (!Objects.equals(this.gender, other.gender)) {
+            return false;
+        }
+        if (!Objects.equals(this.hire_date, other.hire_date)) {
+            return false;
+        }
+        return true;
     }
 
 }

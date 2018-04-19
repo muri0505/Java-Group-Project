@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public abstract class AbstractFactory<T> implements Factory<T> {
     public List<T> createListFromResultSet(ResultSet rs) {
         List<T> collections = Collections.EMPTY_LIST;
         try {
-            collections = new ArrayList<>(100);
+            collections = new LinkedList<>();
             //rs.beforeFirst();
             while (rs.next()) {
                 collections.add(createFromResultSet(rs));

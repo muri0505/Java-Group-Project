@@ -1,3 +1,4 @@
+
 import hthurow.tomcatjndi.TomcatJNDI;
 import java.io.File;
 import org.junit.AfterClass;
@@ -11,11 +12,17 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  * @author Shahriar (Shawn) Emami
  * @date December 29, 2017
- * @see <a href="https://www.youtube.com/watch?v=N8uZnPR5QVw">JUnit 4 tutorial(youtube)</a>
- * @see <a href="https://github.com/h-thurow/TomcatJNDI">TomcatJNDI for JUnit 4</a>
+ * @see <a href="https://www.youtube.com/watch?v=N8uZnPR5QVw">JUnit 4
+ * tutorial(youtube)</a>
+ * @see <a href="https://github.com/h-thurow/TomcatJNDI">TomcatJNDI for JUnit
+ * 4</a>
  */
 @RunWith(Suite.class)
-@SuiteClasses({/* [ClassName.class], more classes if any */})
+@Suite.SuiteClasses({transferobjects.DeptManagerTest.class,
+    transferobjects.TitleTest.class, transferobjects.DepartmentTest.class,
+    transferobjects.EmployeeTest.class, transferobjects.DeptEmployeeTest.class,
+    transferobjects.SalaryTest.class,
+    })
 public class AllTestSuite {
 
     private static TomcatJNDI tomcatJNDI;
