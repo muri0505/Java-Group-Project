@@ -22,12 +22,18 @@ import transferobjects.DeptEmployee;
  *
  * @author Owner
  */
-public class DeptEmployeeDAOImpl implements DeptEmployeeDAO{
+public class DeptEmployeeDAOImpl implements DeptEmployeeDAO {
+
     private static final String GET_ALL_DEPT_EMPLOYEE = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp ORDER BY emp_no LIMIT 100";
     private static final String INSERT_DEPT_EMPLOYEE = "INSERT INTO dept_emp (emp_no, dept_no, from_date, to_date) VALUES(?,?,?,?)";
     private static final String SEARCH_DEPT_EMPLOYEE_EMPNO = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp WHERE emp_no = ";
     private static final String SEARCH_DEPT_EMPLOYEE_DEPTNO = "SELECT emp_no, dept_no, from_date, to_date FROM dept_emp WHERE dept_no = ";
-    
+
+    /**
+     * returns all records
+     *
+     * @return
+     */
     @Override
     public List<DeptEmployee> getAllDeptEmployees() {
         @SuppressWarnings("unchecked")
@@ -74,7 +80,7 @@ public class DeptEmployeeDAOImpl implements DeptEmployeeDAO{
         }
         return deptEmployees;
     }
-    
+
     @Override
     public void addDeptEmployee(DeptEmployee deptEmployee) {
         try (Connection con = DataSource.getConnection();
@@ -88,50 +94,56 @@ public class DeptEmployeeDAOImpl implements DeptEmployeeDAO{
             Logger.getLogger(DeptEmployeeDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
-    public DeptEmployee getDeptEmployeeByEmpNo(Integer empNo){
+    public DeptEmployee getDeptEmployeeByEmpNo(Integer empNo) {
         DeptEmployeeFactory deptEmployeeFactory = null;
         DeptEmployee deptEmployee = null;
-        try( Connection con = DataSource.getConnection();
+        try (Connection con = DataSource.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(SEARCH_DEPT_EMPLOYEE_EMPNO + "'" + empNo + "'");
-                ResultSet rs = pstmt.executeQuery();){
-            
-            while(rs.next()){
-                deptEmployeeFactory = (DeptEmployeeFactory)DTOFactoryCreator.createBuilder(DeptEmployee.class);
-                if (deptEmployeeFactory.createFromResultSet(rs).getDeptNo() == null){
+                ResultSet rs = pstmt.executeQuery();) {
+
+            while (rs.next()) {
+                deptEmployeeFactory = (DeptEmployeeFactory) DTOFactoryCreator.createBuilder(DeptEmployee.class);
+                if (deptEmployeeFactory.createFromResultSet(rs).getDeptNo() == null) {
                     deptEmployee = null;
-                }else{
+                } else {
                     deptEmployee = deptEmployeeFactory.createFromResultSet(rs);
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return deptEmployee;
     }
-    
+
+    /**
+     * find a record based or id number, then creates an object using factory
+     *
+     * @param deptNo
+     * @return
+     */
     @Override
-    public List<DeptEmployee> getDeptEmployeeByDeptNo(String deptNo){
+    public List<DeptEmployee> getDeptEmployeeByDeptNo(String deptNo) {
         DeptEmployeeFactory deptEmployeeFactory = null;
         List<DeptEmployee> deptEmployees = Collections.EMPTY_LIST;
-        
-        try( Connection con = DataSource.getConnection();
+
+        try (Connection con = DataSource.getConnection();
                 PreparedStatement pstmt = con.prepareStatement(SEARCH_DEPT_EMPLOYEE_DEPTNO + "'" + deptNo + "' LIMIT 100");
-                ResultSet rs = pstmt.executeQuery();){
-            
-            while(rs.next()){
-                deptEmployeeFactory = (DeptEmployeeFactory)DTOFactoryCreator.createBuilder(DeptEmployee.class);
-                if (deptEmployeeFactory.createFromResultSet(rs).getDeptNo() == null){
+                ResultSet rs = pstmt.executeQuery();) {
+
+            while (rs.next()) {
+                deptEmployeeFactory = (DeptEmployeeFactory) DTOFactoryCreator.createBuilder(DeptEmployee.class);
+                if (deptEmployeeFactory.createFromResultSet(rs).getDeptNo() == null) {
                     deptEmployees = null;
-                }else{
+                } else {
                     rs.beforeFirst();
                     deptEmployees = deptEmployeeFactory.createListFromResultSet(rs);
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DepartmentDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return deptEmployees;
     }
 }

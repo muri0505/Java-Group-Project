@@ -43,7 +43,7 @@ public class DeptEmployeeTable extends HttpServlet {
 
             DeptEmployeesLogic logic = new DeptEmployeesLogic();
             List<DeptEmployee> deptEmployees = logic.getAllDeptEmployees();
-            
+
             out.println("<table border=\"1\">");
             out.println("<caption>DeptEmployees</caption>");
             out.println("<tr>");

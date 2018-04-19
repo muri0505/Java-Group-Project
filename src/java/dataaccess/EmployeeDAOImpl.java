@@ -27,6 +27,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     //private static final String UPDATE_COURSES = "UPDATE Courses SET name = ? WHERE course_num = ?";
     //private static final String GET_BY_CODE_COURSES = "SELECT course_num, name FROM Courses WHERE name = ?";
 
+    /**
+     * returns all records
+     *
+     * @return
+     */
     @Override
     public List<Employee> getAllEmployees() {
         @SuppressWarnings("unchecked")
@@ -104,9 +109,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
     }
 
+    /**
+     * find a record based or id number, then creates an object using factory
+     *
+     * @param EmployeeNo
+     * @return
+     */
     @Override
     public Employee getEmployeeByEmployeeNo(Integer EmployeeNo) {
-        
+
         EmployeeFactory employeeFactory = null;
         Employee employee = null;
         try (Connection con = DataSource.getConnection();

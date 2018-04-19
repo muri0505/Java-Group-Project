@@ -14,15 +14,22 @@ import transferobjects.Title;
  *
  * @author Owner
  */
-public class TitleFactory extends AbstractFactory{
+public class TitleFactory extends AbstractFactory {
+
     TitleBuilder db;
-    
-    public TitleFactory(){
+
+    public TitleFactory() {
         db = new TitleBuilder();
     }
-    
+
+    /**
+     * create a builder from resultset
+     *
+     * @param rs
+     * @return
+     */
     @Override
-    public Title createFromResultSet(ResultSet rs){
+    public Title createFromResultSet(ResultSet rs) {
         db = new TitleBuilder();
         db.setEmpNo(rs);
         db.setTitle(rs);
@@ -30,7 +37,13 @@ public class TitleFactory extends AbstractFactory{
         db.setToDate(rs);
         return db.getTitle();
     }
-    
+
+    /**
+     * calls builder to create an object
+     *
+     * @param map
+     * @return
+     */
     @Override
     public Title createFromMap(Map map) {
         db.build(map);

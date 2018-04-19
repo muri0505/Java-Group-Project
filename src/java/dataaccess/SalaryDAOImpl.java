@@ -22,11 +22,17 @@ import transferobjects.Salary;
  *
  * @author Owner
  */
-public class SalaryDAOImpl implements SalaryDAO{
+public class SalaryDAOImpl implements SalaryDAO {
+
     private static final String GET_ALL_SALARY = "SELECT emp_no, salary, from_date, to_date FROM salaries ORDER BY emp_no LIMIT 100";
     private static final String INSERT_SALARY = "INSERT INTO salaries (emp_no, salary, from_date, to_date) VALUES(?,?,?,?)";
     private static final String SEARCH_SALARY_BY_EMPNO = "SELECT emp_no, salary, from_date, to_date FROM salaries WHERE emp_no = ";
-    
+
+    /**
+     * returns all records
+     *
+     * @return
+     */
     @Override
     public List<Salary> getAllSalaries() {
         @SuppressWarnings("unchecked")
@@ -73,7 +79,7 @@ public class SalaryDAOImpl implements SalaryDAO{
         }
         return salaries;
     }
-    
+
     @Override
     public void addSalary(Salary salary) {
         try (Connection con = DataSource.getConnection();
@@ -87,9 +93,15 @@ public class SalaryDAOImpl implements SalaryDAO{
             Logger.getLogger(SalaryDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    /**
+     * find a record based or id number, then creates an object using factory
+     *
+     * @param empNo
+     * @return
+     */
     @Override
-    public List<Salary> getSalaryByEmpNo(Integer empNo){
+    public List<Salary> getSalaryByEmpNo(Integer empNo) {
         SalaryFactory salaryFactory = null;
         List<Salary> salary = null;
         try (Connection con = DataSource.getConnection();

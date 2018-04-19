@@ -43,7 +43,7 @@ public class SalaryTable extends HttpServlet {
 
             SalaryLogic logic = new SalaryLogic();
             List<Salary> salaries = logic.getAllSalaries();
-            
+
             out.println("<table border=\"1\">");
             out.println("<caption>Salaries</caption>");
             out.println("<tr>");

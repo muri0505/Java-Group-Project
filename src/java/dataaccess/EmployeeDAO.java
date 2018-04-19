@@ -17,6 +17,7 @@ public interface EmployeeDAO {
     List<Employee> getAllEmployees();
 
     void addEmployee(Employee employee);
+
     //List<Employee> getEmployeeByFirstName(String firstName);
     Employee getEmployeeByEmployeeNo(Integer EmployeeNo);
     //void updateEmployee(Employee employee);

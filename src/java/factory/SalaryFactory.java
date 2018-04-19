@@ -14,15 +14,22 @@ import transferobjects.Salary;
  *
  * @author Owner
  */
-public class SalaryFactory extends AbstractFactory{
+public class SalaryFactory extends AbstractFactory {
+
     SalaryBuilder db;
-    
-    public SalaryFactory(){
+
+    public SalaryFactory() {
         db = new SalaryBuilder();
     }
-    
+
+    /**
+     * create builder from resultset, returns an object
+     *
+     * @param rs
+     * @return
+     */
     @Override
-    public Salary createFromResultSet(ResultSet rs){
+    public Salary createFromResultSet(ResultSet rs) {
         db = new SalaryBuilder();
         db.setEmpNo(rs);
         db.setSalary(rs);
@@ -30,7 +37,13 @@ public class SalaryFactory extends AbstractFactory{
         db.setToDate(rs);
         return db.getSalary();
     }
-    
+
+    /**
+     * calls builder to create an object
+     *
+     * @param map
+     * @return
+     */
     @Override
     public Salary createFromMap(Map map) {
         db.build(map);

@@ -7,7 +7,6 @@ import dataaccess.EmployeeDAO;
 
 /**
  *
- * @course Shahriar Emami
  * @author Can Shi
  */
 public class EmployeesLogic {
@@ -27,13 +26,18 @@ public class EmployeesLogic {
         return employeeDAO.getAllEmployees();
     }
 
+    /**
+     * validates then call DAO method
+     *
+     * @param employee
+     */
     public void addEmployee(Employee employee) {
         cleanEmployee(employee);
         validateEmployee(employee);
         employeeDAO.addEmployee(employee);
     }
-    
-    public Employee getEmployeeByEmployeeNo(Integer EmployeeNo){
+
+    public Employee getEmployeeByEmployeeNo(Integer EmployeeNo) {
         return employeeDAO.getEmployeeByEmployeeNo(EmployeeNo);
     }
 
@@ -63,6 +67,11 @@ public class EmployeesLogic {
         }
     }
 
+    /**
+     * validates for proper input
+     *
+     * @param employee
+     */
     private void validateEmployee(Employee employee) {
         //validateString(employee.getEmpNo(), "Employee Number", EMPLOYEE_NO_MAX_LENGTH, false);
         validateString(employee.getBirthDate(), "Birth Date", EMPLOYEE_DATE_MAX_LENGTH, false);

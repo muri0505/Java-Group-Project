@@ -14,15 +14,22 @@ import transferobjects.DeptEmployee;
  *
  * @author Owner
  */
-public class DeptEmployeeFactory extends AbstractFactory{
+public class DeptEmployeeFactory extends AbstractFactory {
+
     DeptEmployeeBuilder db;
-    
-    public DeptEmployeeFactory(){
+
+    public DeptEmployeeFactory() {
         db = new DeptEmployeeBuilder();
     }
-    
+
+    /**
+     * create a builder from resultset, then creates an object
+     *
+     * @param rs
+     * @return
+     */
     @Override
-    public DeptEmployee createFromResultSet(ResultSet rs){
+    public DeptEmployee createFromResultSet(ResultSet rs) {
         db = new DeptEmployeeBuilder();
         db.setEmpNo(rs);
         db.setDeptNo(rs);
@@ -30,7 +37,13 @@ public class DeptEmployeeFactory extends AbstractFactory{
         db.setToDate(rs);
         return db.getDeptEmployee();
     }
-    
+
+    /**
+     * calls builder to create an object
+     *
+     * @param map
+     * @return
+     */
     @Override
     public DeptEmployee createFromMap(Map map) {
         db.build(map);

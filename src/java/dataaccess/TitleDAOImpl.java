@@ -17,15 +17,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.Title;
+
 /**
  *
  * @author Owner
  */
-public class TitleDAOImpl implements TitleDAO{
+public class TitleDAOImpl implements TitleDAO {
+
     private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no LIMIT 100";
     private static final String INSERT_TITLES = "INSERT INTO titles (emp_no, title, from_date, to_date) VALUES(?,?,?,?)";
     private static final String SEARCH_TITLE_BY_EMPNO = "SELECT emp_no, title, from_date, to_date FROM titles WHERE emp_no = ";
-    
+
+    /**
+     * returns all records
+     *
+     * @return
+     */
     @Override
     public List<Title> getAllTitles() {
         @SuppressWarnings("unchecked")
@@ -72,7 +79,7 @@ public class TitleDAOImpl implements TitleDAO{
         }
         return titles;
     }
-    
+
     @Override
     public void addTitle(Title title) {
         try (Connection con = DataSource.getConnection();
@@ -86,9 +93,15 @@ public class TitleDAOImpl implements TitleDAO{
             Logger.getLogger(TitleDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    /**
+     * find a record based or id number, then creates an object using factory
+     *
+     * @param empNo
+     * @return
+     */
     @Override
-    public List<Title> getTitleByEmployeeNo(Integer empNo){
+    public List<Title> getTitleByEmployeeNo(Integer empNo) {
         TitleFactory titleFactory = null;
         List<Title> title = null;
         try (Connection con = DataSource.getConnection();

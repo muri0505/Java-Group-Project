@@ -15,28 +15,34 @@ import transferobjects.Salary;
  * @author Owner
  */
 public class SalaryLogic {
+
     private static final int SALARY_DATE = 10;
-    
+
     private SalaryDAO salaryDAO = null;
-    
-    public SalaryLogic(){
+
+    public SalaryLogic() {
         salaryDAO = new SalaryDAOImpl();
     }
-    
+
     public List<Salary> getAllSalaries() {
         return salaryDAO.getAllSalaries();
     }
-    
+
+    /**
+     * validates then call DAO method
+     *
+     * @param salary
+     */
     public void addSalary(Salary salary) {
         cleanSalary(salary);
         validateSalary(salary);
         salaryDAO.addSalary(salary);
     }
-    
-    public List<Salary> getSalaryByEmpNo(Integer empNo){
+
+    public List<Salary> getSalaryByEmpNo(Integer empNo) {
         return salaryDAO.getSalaryByEmpNo(empNo);
     }
-    
+
     private void cleanSalary(Salary salary) {
         if (salary.getEmpNo() != null) {
             salary.setEmpNo(salary.getEmpNo().trim());
@@ -54,14 +60,22 @@ public class SalaryLogic {
             salary.setToDate(salary.getToDate().trim());
         }
     }
-    
+
     private void validateSalary(Salary salary) {
         //validateString(salary.getEmpNo(), "Employee Number", SALARY_NO_MAX_LENGTH, false);
         //validateString(salary.getSalary(), "Salary", SALARY_NAME_MAX_LENGTH, false);
         validateString(salary.getFromDate(), "From Date", SALARY_DATE, false);
         validateString(salary.getToDate(), "To Date", SALARY_DATE, false);
     }
-    
+
+    /**
+     * checks for proper input
+     *
+     * @param value
+     * @param fieldName
+     * @param maxLength
+     * @param isNullAllowed
+     */
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate
@@ -76,4 +90,3 @@ public class SalaryLogic {
         }
     }
 }
-

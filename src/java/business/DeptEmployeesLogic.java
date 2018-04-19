@@ -15,33 +15,39 @@ import transferobjects.DeptEmployee;
  * @author Owner
  */
 public class DeptEmployeesLogic {
+
     private static final int DEPT_EMPLOYEE_DEPTNO = 45;
     private static final int DEPT_EMPLOYEE_DATE = 10;
-    
+
     private DeptEmployeeDAO deptEmployeeDAO = null;
-    
-    public DeptEmployeesLogic(){
+
+    public DeptEmployeesLogic() {
         deptEmployeeDAO = new DeptEmployeeDAOImpl();
     }
-    
+
     public List<DeptEmployee> getAllDeptEmployees() {
         return deptEmployeeDAO.getAllDeptEmployees();
     }
-    
+
+    /**
+     * validates then call DAO method
+     *
+     * @param deptEmployee
+     */
     public void addDeptEmployee(DeptEmployee deptEmployee) {
         cleanDeptEmployee(deptEmployee);
         validateDeptEmployee(deptEmployee);
         deptEmployeeDAO.addDeptEmployee(deptEmployee);
     }
-    
-    public DeptEmployee getDeptEmployeeByEmpNo(Integer EmpNo){
+
+    public DeptEmployee getDeptEmployeeByEmpNo(Integer EmpNo) {
         return deptEmployeeDAO.getDeptEmployeeByEmpNo(EmpNo);
     }
-    
-    public List<DeptEmployee> getDeptEmployeeByDeptNo(String deptNo){
+
+    public List<DeptEmployee> getDeptEmployeeByDeptNo(String deptNo) {
         return deptEmployeeDAO.getDeptEmployeeByDeptNo(deptNo);
     }
-    
+
     private void cleanDeptEmployee(DeptEmployee deptEmployee) {
         if (deptEmployee.getEmpNo() != null) {
             deptEmployee.setEmpNo(deptEmployee.getEmpNo().trim());
@@ -59,14 +65,19 @@ public class DeptEmployeesLogic {
             deptEmployee.setToDate(deptEmployee.getToDate().trim());
         }
     }
-    
+
+    /**
+     * validates for proper input
+     *
+     * @param deptEmployee
+     */
     private void validateDeptEmployee(DeptEmployee deptEmployee) {
         //validateString(deptEmployee.getEmpNo(), "Employee Number", DEPT_EMPLOYEE_NO_MAX_LENGTH, false);
         validateString(deptEmployee.getDeptNo(), "Department Number", DEPT_EMPLOYEE_DEPTNO, false);
         validateString(deptEmployee.getFromDate(), "From Date", DEPT_EMPLOYEE_DATE, false);
         validateString(deptEmployee.getToDate(), "To Date", DEPT_EMPLOYEE_DATE, false);
     }
-    
+
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate

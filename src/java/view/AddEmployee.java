@@ -4,6 +4,7 @@ import business.EmployeesLogic;
 import factory.DTOFactoryCreator;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -47,7 +48,6 @@ public class AddEmployee extends HttpServlet {
             out.println("<input type=\"submit\" value=\"Submit\">");
             out.println("</form>");
             out.println("<pre>");
-            out.println("Submitted keys and values:");
             out.println(toStringMap(request.getParameterMap()));
             out.println("</pre>");
             out.println("</body>");
@@ -87,7 +87,8 @@ public class AddEmployee extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method. validates form input then adds
+     * value to database
      *
      * @param request servlet request
      * @param response servlet response
@@ -97,14 +98,38 @@ public class AddEmployee extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Employee employee = DTOFactoryCreator.createBuilder(Employee.class).createFromMap(request.getParameterMap());
-        EmployeesLogic logic = new EmployeesLogic();
-        logic.addEmployee(employee);
+        ArrayList erros = new ArrayList();
         PrintWriter writer = response.getWriter();
-        String htmlResponse = "<html><h2>New employee added</h2></html>";
-        writer.println(htmlResponse);
-        //  processRequest(request, response);     
+        String birth_date = request.getParameter("birth_date");
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
+        String gender = request.getParameter("gender");
+        String hire_date = request.getParameter("hire_date");
+        if (birth_date == null || birth_date == "") {
+            erros.add("Provide birth date...");
+        }
+        if (first_name == null || first_name == "") {
+            erros.add("Provide first name...");
+        }
+        if (last_name == null || last_name == "") {
+            erros.add("Provide last name...");
+        }
+        if (gender == null || gender == "") {
+            erros.add("Provide gender...");
+        }
+        if (hire_date == null || hire_date == "") {
+            erros.add("Provide hire date...");
+        }
+        if (erros.size() != 0) {
+            writer.println(erros);
+        } else {
+            Employee employee = DTOFactoryCreator.createBuilder(Employee.class).createFromMap(request.getParameterMap());
+            EmployeesLogic logic = new EmployeesLogic();
+            logic.addEmployee(employee);
+            String htmlResponse = "<html><h2>New employee added</h2></html>";
+            writer.println(htmlResponse);
+            //  processRequest(request, response); 
+        }
     }
 
     /**

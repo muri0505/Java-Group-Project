@@ -8,15 +8,16 @@ package dataaccess;
 import java.util.List;
 import transferobjects.Title;
 
-
 /**
  *
  * @author Owner
  */
 public interface TitleDAO {
+
     List<Title> getAllTitles();
 
     void addTitle(Title title);
+
     //List<Employee> getEmployeeByFirstName(String firstName);
     List<Title> getTitleByEmployeeNo(Integer EmployeeNo);
     //void updateEmployee(Employee employee);

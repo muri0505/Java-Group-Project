@@ -13,9 +13,12 @@ import transferobjects.DeptManager;
  * @author Owner
  */
 public interface DeptManagerDAO {
+
     List<DeptManager> getAllDeptManagers();
 
     void addDeptManager(DeptManager deptManager);
+
     DeptManager getDeptManagerByEmpNo(Integer empNo);
+
     List<DeptManager> getDeptManagerByDeptNo(String deptNo);
 }

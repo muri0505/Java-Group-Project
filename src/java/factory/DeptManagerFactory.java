@@ -9,19 +9,27 @@ import builders.DeptManagerBuilder;
 import java.sql.ResultSet;
 import java.util.Map;
 import transferobjects.DeptManager;
+
 /**
  *
  * @author Owner
  */
-public class DeptManagerFactory extends AbstractFactory{
+public class DeptManagerFactory extends AbstractFactory {
+
     DeptManagerBuilder db;
-    
-    public DeptManagerFactory(){
+
+    public DeptManagerFactory() {
         db = new DeptManagerBuilder();
     }
-    
+
+    /**
+     * create a builder from resultset, then creates an object
+     *
+     * @param rs
+     * @return
+     */
     @Override
-    public DeptManager createFromResultSet(ResultSet rs){
+    public DeptManager createFromResultSet(ResultSet rs) {
         db = new DeptManagerBuilder();
         db.setEmpNo(rs);
         db.setDeptNo(rs);
@@ -29,7 +37,13 @@ public class DeptManagerFactory extends AbstractFactory{
         db.setToDate(rs);
         return db.getDeptManager();
     }
-    
+
+    /**
+     * calls builder to create an object
+     *
+     * @param map
+     * @return
+     */
     @Override
     public DeptManager createFromMap(Map map) {
         db.build(map);

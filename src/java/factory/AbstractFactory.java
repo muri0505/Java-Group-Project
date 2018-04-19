@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import transferobjects.Department;
+
 /**
  *
  * @author shican
@@ -27,6 +28,12 @@ public abstract class AbstractFactory<T> implements Factory<T> {
     @Override
     public abstract T createFromMap(Map<String, String[]> map);
 
+    /**
+     * creates a list of type T
+     *
+     * @param rs
+     * @return
+     */
     @Override
     public List<T> createListFromResultSet(ResultSet rs) {
         List<T> collections = Collections.EMPTY_LIST;
@@ -35,7 +42,7 @@ public abstract class AbstractFactory<T> implements Factory<T> {
             //rs.beforeFirst();
             while (rs.next()) {
                 collections.add(createFromResultSet(rs));
-           }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AbstractFactory.class.getName()).log(Level.SEVERE, null, ex);
         }

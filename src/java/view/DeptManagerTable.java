@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import transferobjects.DeptManager;
+
 /**
  *
  * @author Owner
@@ -42,7 +43,7 @@ public class DeptManagerTable extends HttpServlet {
 
             DeptManagersLogic logic = new DeptManagersLogic();
             List<DeptManager> deptManagers = logic.getAllDeptManagers();
-            
+
             out.println("<table border=\"1\">");
             out.println("<caption>DeptManagers</caption>");
             out.println("<tr>");
@@ -61,6 +62,7 @@ public class DeptManagerTable extends HttpServlet {
             out.println("</html>");
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

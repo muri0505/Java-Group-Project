@@ -26,11 +26,16 @@ public class EmployeeBuilder {
     private static String COL_EMPLOYEE_HIRE_DATE = "hire_date";
 
     private Employee employee;
-    
-    public EmployeeBuilder(){
+
+    public EmployeeBuilder() {
         employee = new Employee();
     }
 
+    /**
+     * set values for the Employee object
+     *
+     * @param map
+     */
     public void build(Map<String, String[]> map) {
         setEmployeeBirthDate(map);
         setEmployeeFirstName(map);

@@ -43,7 +43,7 @@ public class TitleTable extends HttpServlet {
 
             TitlesLogic logic = new TitlesLogic();
             List<Title> titles = logic.getAllTitles();
-            
+
             out.println("<table border=\"1\">");
             out.println("<caption>Titles</caption>");
             out.println("<tr>");

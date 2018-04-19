@@ -19,6 +19,16 @@ public class Employee {
     public Employee() {
     }
 
+    /**
+     * sets values
+     *
+     * @param emp_no
+     * @param birth_date
+     * @param first_name
+     * @param last_name
+     * @param gender
+     * @param hire_date
+     */
     public Employee(String emp_no, String birth_date, String first_name, String last_name, String gender, String hire_date) {
         setBirthDate(birth_date);
         setFirstName(first_name);

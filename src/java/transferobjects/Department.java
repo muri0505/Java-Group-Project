@@ -15,6 +15,12 @@ public class Department {
     public Department() {
     }
 
+    /**
+     * sets values
+     *
+     * @param dept_no
+     * @param dept_name
+     */
     public Department(String dept_no, String dept_name) {
         setDeptNo(dept_no);
         setDeptName(dept_name);

@@ -14,13 +14,20 @@ import transferobjects.Employee;
  *
  * @author shican
  */
-public class EmployeeFactory extends AbstractFactory{
+public class EmployeeFactory extends AbstractFactory {
+
     EmployeeBuilder db;
-    
-    public EmployeeFactory(){
+
+    public EmployeeFactory() {
         db = new EmployeeBuilder();
     }
 
+    /**
+     * creates a builder from resultset, then returns an object
+     *
+     * @param rs
+     * @return
+     */
     @Override
     public Employee createFromResultSet(ResultSet rs) {
         db = new EmployeeBuilder();
@@ -33,6 +40,12 @@ public class EmployeeFactory extends AbstractFactory{
         return db.getEmployee();
     }
 
+    /**
+     * calls builder to create an object
+     *
+     * @param map
+     * @return
+     */
     @Override
     public Employee createFromMap(Map map) {
         db.build(map);

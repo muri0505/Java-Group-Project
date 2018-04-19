@@ -6,8 +6,6 @@ import transferobjects.Department;
 import dataaccess.DepartmentDAO;
 
 /**
- *
- * @course Shahriar Emami
  * @author Can Shi
  */
 public class DepartmentsLogic {
@@ -25,13 +23,18 @@ public class DepartmentsLogic {
         return departmentDAO.getAllDepartments();
     }
 
+    /**
+     * validates then call DAO method
+     *
+     * @param department
+     */
     public void addDepartment(Department department) {
         cleanDepartment(department);
         validateDepartment(department);
         departmentDAO.addDepartment(department);
     }
-    
-    public Department getDepartmentByDepartmentNo(String DepartmentNo){
+
+    public Department getDepartmentByDepartmentNo(String DepartmentNo) {
         return departmentDAO.getDepartmentByDepartmentNo(DepartmentNo);
     }
 
@@ -50,6 +53,14 @@ public class DepartmentsLogic {
         validateString(department.getDeptName(), "Department Name", DEPARTMENT_NAME_MAX_LENGTH, false);
     }
 
+    /**
+     * validates proper input values
+     *
+     * @param value
+     * @param fieldName
+     * @param maxLength
+     * @param isNullAllowed
+     */
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate

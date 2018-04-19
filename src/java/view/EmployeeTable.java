@@ -6,7 +6,6 @@
 package view;
 
 import business.EmployeesLogic;
-import business.TitlesLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,11 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import transferobjects.Employee;
-import transferobjects.Title;
 
 /**
  *
- * @author Shariar
+ * @author Can Shi
  */
 public class EmployeeTable extends HttpServlet {
 
@@ -45,7 +43,7 @@ public class EmployeeTable extends HttpServlet {
 
             EmployeesLogic logic = new EmployeesLogic();
             List<Employee> employees = logic.getAllEmployees();
-            
+
             out.println("<table border=\"1\">");
             out.println("<caption>Employees</caption>");
             out.println("<tr>");
@@ -56,7 +54,7 @@ public class EmployeeTable extends HttpServlet {
             out.println("<th>gender</th>");
             out.println("<th>hire_date</th>");
             out.println("</tr>");
-            
+
             for (Employee employee : employees) {
                 out.printf("<tr> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> <td>%s</td> </tr>",
                         employee.getEmpNo(), employee.getBirthDate(),
@@ -106,7 +104,7 @@ public class EmployeeTable extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "EmployeeTable";
     }// </editor-fold>
 
 }

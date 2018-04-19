@@ -42,7 +42,7 @@ public class DataSource {
     /**
      * Only use one connection for this application, prevent memory leaks.
      *
-     * @return
+     * @return Connection
      */
     public static Connection getConnection() {
         if (singleton == null) {

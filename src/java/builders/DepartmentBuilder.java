@@ -17,10 +17,15 @@ public class DepartmentBuilder {
     private static String COL_DEPT_NAME = "dept_name";
     private Department department;
 
-    public DepartmentBuilder(){
+    public DepartmentBuilder() {
         department = new Department();
     }
-    
+
+    /**
+     * set values for the department
+     *
+     * @param map
+     */
     public void build(Map<String, String[]> map) {
         setDeptNo(map);
         setDeptName(map);

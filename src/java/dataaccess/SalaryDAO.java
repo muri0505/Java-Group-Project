@@ -13,9 +13,11 @@ import transferobjects.Salary;
  * @author Owner
  */
 public interface SalaryDAO {
+
     List<Salary> getAllSalaries();
 
     void addSalary(Salary salary);
+
     List<Salary> getSalaryByEmpNo(Integer empNo);
     //Title getEmployeByEmployeeNo(Integer EmployeeNo);
     //void updateEmployee(Employee employee);

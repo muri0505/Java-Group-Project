@@ -15,33 +15,39 @@ import transferobjects.DeptManager;
  * @author Owner
  */
 public class DeptManagersLogic {
+
     private static final int DEPT_MANAGER_DEPT = 4;
     private static final int DEPT_MANAGER_DATE = 10;
-    
+
     private DeptManagerDAO deptManagerDAO = null;
-    
-    public DeptManagersLogic(){
+
+    public DeptManagersLogic() {
         deptManagerDAO = new DeptManagerDAOImpl();
     }
-    
+
     public List<DeptManager> getAllDeptManagers() {
         return deptManagerDAO.getAllDeptManagers();
     }
-    
+
+    /**
+     * validates then call DAO method
+     *
+     * @param deptManager
+     */
     public void addDeptManager(DeptManager deptManager) {
         cleanDeptManager(deptManager);
         validateDeptManager(deptManager);
         deptManagerDAO.addDeptManager(deptManager);
     }
-    
-    public DeptManager getDeptManagerByEmpNo(Integer EmpNo){
+
+    public DeptManager getDeptManagerByEmpNo(Integer EmpNo) {
         return deptManagerDAO.getDeptManagerByEmpNo(EmpNo);
     }
-    
-    public List<DeptManager> getDeptManagerByDeptNo(String deptNo){
+
+    public List<DeptManager> getDeptManagerByDeptNo(String deptNo) {
         return deptManagerDAO.getDeptManagerByDeptNo(deptNo);
     }
-    
+
     private void cleanDeptManager(DeptManager deptManager) {
         if (deptManager.getEmpNo() != null) {
             deptManager.setEmpNo(deptManager.getEmpNo().trim());
@@ -59,14 +65,19 @@ public class DeptManagersLogic {
             deptManager.setToDate(deptManager.getToDate().trim());
         }
     }
-    
+
+    /**
+     * checks for proper input
+     *
+     * @param deptManager
+     */
     private void validateDeptManager(DeptManager deptManager) {
         //validateString(deptManager.getEmpNo(), "Employee Number", DEPT_MANAGER_NO_MAX_LENGTH, false);
         validateString(deptManager.getDeptNo(), "Department Number", DEPT_MANAGER_DEPT, false);
         validateString(deptManager.getFromDate(), "From Date", DEPT_MANAGER_DATE, false);
         validateString(deptManager.getToDate(), "To Date", DEPT_MANAGER_DATE, false);
     }
-    
+
     private void validateString(String value, String fieldName, int maxLength, boolean isNullAllowed) {
         if (value == null && isNullAllowed) {
             // null permitted, nothing to validate
