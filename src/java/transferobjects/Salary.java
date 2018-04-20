@@ -5,6 +5,8 @@
  */
 package transferobjects;
 
+import java.util.Objects;
+
 /**
  *
  * @author Owner
@@ -64,5 +66,42 @@ public class Salary {
 
     public String getToDate() {
         return to_date;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.emp_no);
+        hash = 23 * hash + Objects.hashCode(this.salary);
+        hash = 23 * hash + Objects.hashCode(this.from_date);
+        hash = 23 * hash + Objects.hashCode(this.to_date);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Salary other = (Salary) obj;
+        if (!Objects.equals(this.emp_no, other.emp_no)) {
+            return false;
+        }
+        if (!Objects.equals(this.salary, other.salary)) {
+            return false;
+        }
+        if (!Objects.equals(this.from_date, other.from_date)) {
+            return false;
+        }
+        if (!Objects.equals(this.to_date, other.to_date)) {
+            return false;
+        }
+        return true;
     }
 }

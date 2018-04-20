@@ -5,7 +5,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * a demo of JUnit 4 for running multiple set of test classes
@@ -18,13 +17,17 @@ import org.junit.runners.Suite.SuiteClasses;
  * 4</a>
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({transferobjects.DeptManagerTest.class,
-    transferobjects.TitleTest.class, transferobjects.DepartmentTest.class,
-    transferobjects.EmployeeTest.class, transferobjects.DeptEmployeeTest.class,
+@Suite.SuiteClasses({
+    transferobjects.TitleTest.class,
     transferobjects.SalaryTest.class,
-    })
-public class AllTestSuite {
+    dataaccess.TitleDAOImplTest.class,
+    dataaccess.SalaryDAOImplTest.class,
+    business.SalaryLogicTest.class,
+    business.TitlesLogicTest.class
+ })
 
+public class AllTestSuite {
+    
     private static TomcatJNDI tomcatJNDI;
 
     @BeforeClass
