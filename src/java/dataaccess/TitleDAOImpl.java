@@ -24,7 +24,7 @@ import transferobjects.Title;
  */
 public class TitleDAOImpl implements TitleDAO {
 
-    private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no LIMIT 100";
+    private static final String GET_ALL_TITLES = "SELECT emp_no, title, from_date, to_date FROM titles ORDER BY emp_no DESC LIMIT 100";
     private static final String INSERT_TITLES = "INSERT INTO titles (emp_no, title, from_date, to_date) VALUES(?,?,?,?)";
     private static final String SEARCH_TITLE_BY_EMPNO = "SELECT emp_no, title, from_date, to_date FROM titles WHERE emp_no = ";
 
